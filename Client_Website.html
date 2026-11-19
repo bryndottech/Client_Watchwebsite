@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURELIA — GENEVA // STUDIO | Drop 01</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Syne + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #09090B;
+      color: #FAFAFA;
+    }
+
+    .font-hype {
+      font-family: 'Syne', sans-serif;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @keyframes subtleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes modalPopIn {
+      0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes drawerSlideLeft {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(0); }
+    }
+
+    .animate-hero-card {
+      animation: subtleFloat 6s ease-in-out infinite;
+    }
+
+    .animate-modal-pop {
+      animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-drawer-slide {
+      animation: drawerSlideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Scroll reveal states */
+    .reveal-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+    }
+    .reveal-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090B;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272A;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #52525B;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#09090B] text-[#FAFAFA] selection:bg-emerald-500 selection:text-black pb-20 md:pb-0 overflow-x-hidden">
+
+  <!-- =====================================================================
+       1. EDGE-LESS GLASSY NAVBAR (NO BORDERS / NO SEARCH BAR)
+  ====================================================================== -->
+  <header id="main-header" class="sticky top-0 z-40 border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/45 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+      <!-- Brand Monogram -->
+      <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="flex items-center gap-3 group shrink-0">
+        <svg viewBox="0 0 40 40" fill="none" class="w-9 h-9 transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
+          <rect x="1" y="1" width="38" height="38" rx="11" fill="#FAFAFA" />
+          <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
+        </svg>
+        <div>
+          <span id="nav-store-name" class="font-hype text-lg sm:text-xl font-extrabold tracking-[0.12em] text-white block leading-none">AURELIA</span>
+          <span id="nav-tagline" class="font-mono-code text-[10px] tracking-[0.2em] text-zinc-400 block mt-1">GENEVA // STUDIO</span>
+        </div>
+      </a>
+
+      <!-- Center Edge-Less Glass Navigation Pill -->
+      <nav class="hidden md:flex items-center gap-7 px-6 py-2.5 rounded-full bg-white/[0.05] backdrop-blur-2xl text-xs font-semibold tracking-wide text-zinc-300">
+        <button type="button" onclick="scrollToSection('collection')" class="hover:text-white transition-colors cursor-pointer">15 Watches</button>
+        <button type="button" onclick="scrollToSection('order-guide')" class="hover:text-white transition-colors cursor-pointer">How to Order</button>
+        <button type="button" onclick="openDirectConcierge()" class="hover:text-emerald-400 transition-colors cursor-pointer">Live Concierge</button>
+      </nav>
+
+      <!-- Right Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Saved Wishlist Pill -->
+        <button type="button" onclick="openWishlistDrawer()" aria-label="Saved Wishlist" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] backdrop-blur-xl text-zinc-200 transition-all cursor-pointer">
+          <svg id="nav-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-300">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          </svg>
+          <span class="hidden lg:inline text-xs font-semibold">Saved</span>
+          <span id="nav-wishlist-count" class="font-mono-code text-[11px] font-bold px-1.5 rounded-full bg-white/10 text-white">0</span>
+        </button>
+
+        <!-- Bag Pill -->
+        <button type="button" onclick="openBagDrawer()" aria-label="Concierge Bag" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-black hover:bg-zinc-200 transition-all cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="hidden sm:inline text-xs font-bold">Bag</span>
+          <span id="nav-bag-count" class="font-mono-code min-w-[20px] h-5 px-1.5 rounded-full bg-black text-white text-[11px] font-bold flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Direct WhatsApp Button -->
+        <button type="button" onclick="openDirectConcierge()" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all cursor-pointer">
+          <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+            <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+          </svg>
+          <span>WhatsApp</span>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button type="button" onclick="openMobileMenu()" aria-label="Open menu" class="md:hidden p-2.5 rounded-full bg-white/[0.07] text-white cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+            <line x1="4" x2="20" y1="7" y2="7" />
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="17" y2="17" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       2. GEN-Z HYPE HERO SECTION (SOLID #09090B CANVAS)
+  ====================================================================== -->
+  <section class="relative pt-8 pb-14 sm:pt-14 sm:pb-20 bg-[#09090B]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <!-- Left Typography Column -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <!-- Live Drop Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#141417] border border-white/10">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="font-mono-code text-[11px] font-semibold uppercase tracking-widest text-zinc-300">
+              DROP 01 // 2026 • OPEN-PARCEL COD
+            </span>
+          </div>
+
+          <!-- Bold Gen-Z Syne Headline -->
+          <h1 class="font-hype text-4xl sm:text-6xl lg:text-[66px] font-extrabold tracking-[-0.04em] text-white uppercase leading-[0.98]">
+            CRAFTED FOR
+            <span class="block text-zinc-400 mt-1">THE NEW ERA.</span>
+          </h1>
+
+          <!-- Clean Subheadline -->
+          <p class="max-w-lg mx-auto lg:mx-0 text-sm sm:text-base text-zinc-400 leading-relaxed">
+            15 heavy-metal automatic, skeleton, and chronograph pieces built with 904L steel &amp;
+            sapphire crystal. Inspect your parcel at your doorstep before paying.
+          </p>
+
+          <!-- High-Contrast Hype CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
+            <button type="button" onclick="scrollToSection('collection')" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+              <span>Shop All 15 Watches</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+
+            <button type="button" onclick="openDirectConcierge()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+              <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+                <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+              </svg>
+              <span>Order on WhatsApp</span>
+            </button>
+          </div>
+
+          <!-- Minimal Mono Trust Strip -->
+          <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 font-mono-code text-[11px] text-zinc-400">
+            <span>[01] 904L STEEL</span>
+            <span>[02] SAPPHIRE GLASS</span>
+            <span>[03] 2-YR WARRANTY</span>
+            <span>[04] FREE COD</span>
+          </div>
+        </div>
+
+        <!-- Right Studio Flagship Watch Spotlight Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="animate-hero-card w-full max-w-sm rounded-3xl bg-[#111114] border border-white/10 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]">
+            <div id="hero-image-trigger" class="relative aspect-[4/4] bg-[#18181B] overflow-hidden cursor-pointer group">
+              <img id="hero-watch-img" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85" alt="Aurelia Carbon Chrono" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#111114] via-transparent to-black/25"></div>
+
+              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+                <span id="hero-watch-ref" class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white border border-white/15">
+                  AUR-001 // CHRONOGRAPH
+                </span>
+                <span class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500 text-black">
+                  IN STOCK
+                </span>
+              </div>
+
+              <!-- Quick Switcher Dots -->
+              <div onclick="event.stopPropagation()" class="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
+                <div id="hero-switcher-dots" class="flex items-center gap-1.5">
+                  <button type="button" onclick="setHeroWatch(0)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-white text-black">01</button>
+                  <button type="button" onclick="setHeroWatch(1)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">02</button>
+                  <button type="button" onclick="setHeroWatch(2)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">03</button>
+                </div>
+
+                <button type="button" id="hero-specs-btn" class="px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-white hover:bg-black cursor-pointer">
+                  Specs
+                </button>
+              </div>
+            </div>
+
+            <!-- Spotlight Footer -->
+            <div class="p-5 flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <h2 id="hero-watch-name" class="font-hype text-base font-bold text-white truncate">Aurelia Carbon Chrono</h2>
+                <p id="hero-watch-price" class="font-mono-code text-sm font-bold text-emerald-400 mt-0.5">Rs. 46,500</p>
+              </div>
+
+              <button type="button" id="hero-order-btn" class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all cursor-pointer">
+                <svg viewBox="0 0 32 32" fill="currentColor" class="w-3.5 h-3.5" aria-hidden="true">
+                  <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+                </svg>
+                <span>Order</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. STRAIGHT TO THE 15 WATCHES (SOLID #09090B)
+  ====================================================================== -->
+  <section id="collection" class="py-10 sm:py-16 bg-[#09090B]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header + Filter & Sort Bar -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">
+            THE LINEUP // 15 PIECES
+          </span>
+          <h2 class="mt-1.5 font-hype text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white uppercase">
+            SELECT YOUR PIECE
+          </h2>
+        </div>
+
+        <!-- Category Filter Pills & Sort -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div id="category-filters" class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-400">
+              <line x1="21" x2="14" y1="4" y2="4" />
+              <line x1="10" x2="3" y1="4" y2="4" />
+              <line x1="21" x2="12" y1="12" y2="12" />
+              <line x1="8" x2="3" y1="12" y2="12" />
+              <line x1="21" x2="16" y1="20" y2="20" />
+              <line x1="12" x2="3" y1="20" y2="20" />
+            </svg>
+            <select id="sort-select" onchange="handleSortChange(this.value)" aria-label="Sort watches" class="px-3 py-2 rounded-xl bg-[#141417] border border-white/10 text-xs font-semibold text-white focus:outline-none cursor-pointer">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Column Solid Dark Watch Grid -->
+      <div id="watches-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4. MINIMAL 3-STEP WHATSAPP ORDER GUIDE (SOLID #0E0E11)
+  ====================================================================== -->
+  <section id="order-guide" class="py-16 bg-[#0E0E11] border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="font-mono-code text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
+            ZERO FRICTION
+          </span>
+          <h2 class="mt-1 font-hype text-2xl sm:text-4xl font-extrabold text-white uppercase">
+            HOW WHATSAPP ORDERING WORKS
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-zinc-400">
+          No account needed. Confirm directly with our team.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 01</span>
+          <h3 class="mt-2 font-hype text-lg font-bold text-white">Tap Order on WhatsApp</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Pick any of the 15 watches or bundle multiple pieces inside your Bag.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 02</span>
+          <h3 class="mt-2 font-hype text-lg font-bold text-white">Enter City &amp; Address</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Preview your formatted order receipt with a unique #AUR order ID.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 03</span>
+          <h3 class="mt-2 font-hype text-lg font-bold text-white">Open-Parcel COD</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Inspect your watch at your doorstep before paying cash on delivery.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5. SOLID CHARCOAL FOOTER (#050507)
+  ====================================================================== -->
+  <footer class="bg-[#050507] text-zinc-400 border-t border-white/[0.08] py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-white/[0.08]">
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <svg viewBox="0 0 40 40" fill="none" class="w-9 h-9" aria-hidden="true">
+              <rect x="1" y="1" width="38" height="38" rx="11" fill="#FAFAFA" />
+              <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
+            </svg>
+            <div>
+              <span class="font-hype text-xl font-extrabold tracking-[0.12em] text-white block">AURELIA</span>
+              <span class="font-mono-code text-[10px] tracking-[0.2em] text-zinc-400">GENEVA // STUDIO</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-zinc-400 max-w-sm leading-relaxed">
+            Limited-batch automatic, skeleton, chronograph, and diver watches shipped
+            nationwide with Insured Open-Parcel Cash on Delivery.
+          </p>
+          <button type="button" onclick="openDirectConcierge()" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-colors cursor-pointer">
+            <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+              <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+            </svg>
+            <span>WhatsApp Concierge</span>
+          </button>
+        </div>
+
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="font-mono-code text-xs font-bold uppercase tracking-widest text-white">Categories</h4>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><button type="button" onclick="scrollToSection('collection', 'Automatic')" class="hover:text-white transition-colors cursor-pointer">Automatic</button></li>
+            <li><button type="button" onclick="scrollToSection('collection', 'Chronograph')" class="hover:text-white transition-colors cursor-pointer">Chronograph</button></li>
+            <li><button type="button" onclick="scrollToSection('collection', 'Skeleton')" class="hover:text-white transition-colors cursor-pointer">Skeleton</button></li>
+            <li><button type="button" onclick="scrollToSection('collection', 'Diver')" class="hover:text-white transition-colors cursor-pointer">Diver</button></li>
+            <li><button type="button" onclick="scrollToSection('collection', 'Dress')" class="hover:text-white transition-colors cursor-pointer">Dress</button></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="font-mono-code text-xs font-bold uppercase tracking-widest text-white">Dispatch &amp; Support</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm">
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Daily • 11:00 AM – 11:00 PM PKT</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+              <span>Free Insured Express Delivery Nationwide</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>7-Day Inspection &amp; 2-Year Warranty</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <p>© <span id="footer-year">2026</span> AURELIA. All rights reserved.</p>
+        <p class="font-mono-code text-zinc-400">OPEN-PARCEL COD // DIRECT WHATSAPP CHECKOUT</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       DESKTOP FLOATING WHATSAPP BUTTON
+  ====================================================================== -->
+  <button type="button" onclick="openDirectConcierge()" aria-label="WhatsApp Concierge" class="hidden md:flex fixed bottom-6 right-6 z-40 items-center gap-2.5 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs shadow-[0_14px_34px_rgba(16,185,129,0.3)] hover:scale-105 transition-all cursor-pointer">
+    <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+      <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+    </svg>
+    <span>WhatsApp Concierge</span>
+  </button>
+
+  <!-- =====================================================================
+       MOBILE FLOATING BOTTOM BAR
+  ====================================================================== -->
+  <nav aria-label="Mobile Quick Actions" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#09090B]/95 backdrop-blur-2xl border-t border-white/10 px-2 py-2 grid grid-cols-4 gap-1">
+    <button type="button" onclick="scrollToSection('collection')" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+      <span class="text-[10px] font-semibold mt-1">Watches</span>
+    </button>
+
+    <button type="button" onclick="openWishlistDrawer()" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
+      <svg id="mobile-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      <span id="mobile-wishlist-label" class="text-[10px] font-semibold mt-1">Saved (0)</span>
+    </button>
+
+    <button type="button" onclick="openBagDrawer()" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span id="mobile-bag-label" class="text-[10px] font-semibold mt-1">Bag (0)</span>
+    </button>
+
+    <button type="button" onclick="openDirectConcierge()" class="flex flex-col items-center justify-center py-1.5 rounded-xl bg-emerald-500 text-black">
+      <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>
+      <span class="text-[10px] font-bold mt-1">WhatsApp</span>
+    </button>
+  </nav>
+
+  <!-- =====================================================================
+       MOBILE HAMBURGER DRAWER
+  ====================================================================== -->
+  <div id="mobile-menu-drawer" onclick="closeMobileMenu()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
+    <div onclick="event.stopPropagation()" class="animate-drawer-slide w-72 h-full bg-[#111114] border-l border-white/10 p-6 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between pb-5 border-b border-white/10">
+          <span class="font-hype text-lg font-extrabold text-white">AURELIA</span>
+          <button type="button" onclick="closeMobileMenu()" class="p-2 rounded-full bg-white/10 text-white">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-2.5">
+          <button type="button" onclick="closeMobileMenu(); scrollToSection('collection')" class="text-left px-4 py-3 rounded-2xl bg-white/10 text-sm font-bold text-white">
+            15-Piece Collection
+          </button>
+          <button type="button" onclick="closeMobileMenu(); scrollToSection('order-guide')" class="text-left px-4 py-3 rounded-2xl hover:bg-white/5 text-sm font-semibold text-zinc-300">
+            How WhatsApp Ordering Works
+          </button>
+        </div>
+      </div>
+
+      <button type="button" onclick="closeMobileMenu(); openDirectConcierge()" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 text-black text-xs font-bold flex items-center justify-center gap-2">
+        <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>
+        <span>WhatsApp Concierge</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       QUICK-VIEW HOROLOGICAL SPECS MODAL
+  ====================================================================== -->
+  <div id="specs-modal" onclick="closeSpecsModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div id="specs-modal-content" onclick="event.stopPropagation()" class="animate-modal-pop relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#111114] border border-white/15 shadow-2xl">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       END-TO-END WHATSAPP EXPRESS ORDER PLACEMENT MODAL
+  ====================================================================== -->
+  <div id="express-modal" onclick="closeExpressModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div id="express-modal-content" onclick="event.stopPropagation()" class="animate-modal-pop relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#111114] border border-white/15 p-6 sm:p-7 shadow-2xl text-white">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MULTI-WATCH CONCIERGE BAG SLIDE-OVER DRAWER
+  ====================================================================== -->
+  <div id="bag-drawer" onclick="closeBagDrawer()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
+    <div id="bag-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       SAVED WISHLIST SLIDE-OVER DRAWER
+  ====================================================================== -->
+  <div id="wishlist-drawer" onclick="closeWishlistDrawer()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
+    <div id="wishlist-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       NON-INTRUSIVE TOAST NOTIFICATION
+  ====================================================================== -->
+  <div id="toast-container" class="hidden fixed bottom-20 md:bottom-7 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md">
+    <div class="animate-modal-pop flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-[#18181B] text-white shadow-2xl border border-white/15">
+      <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-4 h-4"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p id="toast-title" class="text-xs sm:text-sm font-bold truncate"></p>
+        <p id="toast-subtitle" class="text-[11px] text-zinc-400 truncate"></p>
+      </div>
+      <button type="button" onclick="hideToast()" class="text-zinc-400 hover:text-white p-1 cursor-pointer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       APPLICATION JAVASCRIPT LOGIC
+  ====================================================================== -->
+  <script>
+    /**
+     * 1. STORE CONFIGURATION (EDIT YOUR WHATSAPP NUMBER HERE)
+     */
+    const STORE_CONFIG = {
+      storeName: "AURELIA",
+      tagline: "GENEVA // STUDIO",
+      whatsappNumber: "923001234567", // Replace with your WhatsApp number (e.g., 923001234567)
+      currency: "Rs.",
+      deliveryCities: [
+        "Lahore",
+        "Karachi",
+        "Islamabad",
+        "Rawalpindi",
+        "Faisalabad",
+        "Multan",
+        "Sialkot",
+        "Gujrat",
+        "Peshawar"
+      ],
+      freeShippingNote: "Free Insured Express Delivery Nationwide"
+    };
+
+    /**
+     * 2. ALL 15 CURATED LUXURY WATCHES
+     */
+    const WATCHES_DATA = [
+      {
+        id: 1,
+        ref: "AUR-001",
+        name: "Aurelia Carbon Chrono",
+        subtitle: "Brushed 904L Steel • Tachymeter Bezel",
+        category: "Chronograph",
+        price: 46500,
+        originalPrice: 54000,
+        badge: "HOT DROP",
+        image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85",
+        movement: "Column-Wheel Mecha-Quartz Chronograph",
+        caseSize: "40mm × 11.2mm",
+        crystal: "Anti-Reflective Sapphire Crystal",
+        waterResistance: "100M / 10 ATM",
+        strap: "Solid-Link Brushed 904L Steel",
+        powerReserve: "60 Hours Chrono Reserve",
+        story: "Built with razor-sharp brushed bevels and high-contrast subdials. Engineered for daily wrist presence with tactile screw-down pushers."
+      },
+      {
+        id: 2,
+        ref: "AUR-002",
+        name: "Aurelia Phantom Automatic",
+        subtitle: "Matte Obsidian Dial • 28,800 vph Calibre",
+        category: "Automatic",
+        price: 49500,
+        originalPrice: 57500,
+        badge: "BESTSELLER",
+        image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-90 Automatic (28,800 vph)",
+        caseSize: "40mm × 9.8mm",
+        crystal: "Domed AR Sapphire Crystal",
+        waterResistance: "100M / 10 ATM",
+        strap: "Integrated Brushed Steel Bracelet",
+        powerReserve: "72 Hours",
+        story: "Stealth obsidian dial paired with diamond-cut indices and a fluid sweeping seconds hand powered by a 72-hour automatic movement."
+      },
+      {
+        id: 3,
+        ref: "AUR-003",
+        name: "Aurelia Apex Skeleton",
+        subtitle: "Open-Worked Bridge Architecture • Dual Sapphire",
+        category: "Skeleton",
+        price: 62500,
+        originalPrice: 72000,
+        badge: "LIMITED",
+        image: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=900&q=85",
+        movement: "Open-Worked Automatic Calibre AU-77",
+        caseSize: "41.5mm × 10.9mm",
+        crystal: "Dual Exhibition Sapphire (Front & Back)",
+        waterResistance: "50M / 5 ATM",
+        strap: "Tapered 904L Steel Bracelet",
+        powerReserve: "68 Hours",
+        story: "Unfiltered mechanical architecture. Exposed gear trains and a visible beating balance wheel suspended inside a sculpted steel case."
+      },
+      {
+        id: 4,
+        ref: "AUR-004",
+        name: "Aurelia Abyss Diver 300M",
+        subtitle: "Unidirectional Ceramic Bezel • BGW9 Lume",
+        category: "Diver",
+        price: 48900,
+        originalPrice: 56000,
+        badge: "BESTSELLER",
+        image: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-300 Diver Automatic",
+        caseSize: "41mm × 12.1mm",
+        crystal: "3.2mm Thick AR Sapphire",
+        waterResistance: "300M / 30 ATM",
+        strap: "Micro-Adjust Glide-Lock Steel Bracelet",
+        powerReserve: "70 Hours",
+        story: "A 120-click ceramic bezel and high-output nocturnal lume engineered for deep water and bold streetwear styling."
+      },
+      {
+        id: 5,
+        ref: "AUR-005",
+        name: "Aurelia Noir Ultra-Thin 38",
+        subtitle: "6.9mm Slim Profile • Italian Calfskin",
+        category: "Dress",
+        price: 34500,
+        originalPrice: 39500,
+        badge: "NEW DROP",
+        image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-18 Ultra-Thin Mechanical",
+        caseSize: "38mm × 6.9mm",
+        crystal: "Box-Domed Sapphire Crystal",
+        waterResistance: "50M / 5 ATM",
+        strap: "Full-Grain Matte Calfskin Leather",
+        powerReserve: "54 Hours",
+        story: "Minimalist silhouette at just 6.9mm thin. Glides effortlessly under tailored cuffs with razor-clean baton markers."
+      },
+      {
+        id: 6,
+        ref: "AUR-006",
+        name: "Aurelia Cobalt GMT",
+        subtitle: "Sunburst Blue Dial • Dual Time Zone",
+        category: "Automatic",
+        price: 51500,
+        originalPrice: 59000,
+        badge: "TRENDING",
+        image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-GMT Dual-Time Automatic",
+        caseSize: "40mm × 11.2mm",
+        crystal: "Sapphire with Cyclops Date Lens",
+        waterResistance: "100M / 10 ATM",
+        strap: "5-Link Jubilee Steel Bracelet",
+        powerReserve: "72 Hours",
+        story: "Metallic cobalt sunray dial paired with an independent 24-hour GMT hand for effortless dual-city time tracking."
+      },
+      {
+        id: 7,
+        ref: "AUR-007",
+        name: "Aurelia GT Rally Chrono",
+        subtitle: "Tri-Compax Subdials • Perforated Leather",
+        category: "Chronograph",
+        price: 49500,
+        originalPrice: 57500,
+        badge: null,
+        image: "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=900&q=85",
+        movement: "Hi-Beat Tri-Compax Chronograph",
+        caseSize: "41mm × 11.7mm",
+        crystal: "Anti-Reflective Sapphire",
+        waterResistance: "100M / 10 ATM",
+        strap: "Perforated Racing Calfskin Strap",
+        powerReserve: "62 Hours",
+        story: "Motorsport-inspired chronograph counters paired with a breathable perforated leather strap for all-day comfort."
+      },
+      {
+        id: 8,
+        ref: "AUR-008",
+        name: "Aurelia Veloce Open-Heart",
+        subtitle: "Exposed Escapement • Exhibition Caseback",
+        category: "Skeleton",
+        price: 64900,
+        originalPrice: 74500,
+        badge: "FLAGSHIP",
+        image: "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?auto=format&fit=crop&w=900&q=85",
+        movement: "Open-Worked Automatic Calibre AU-81",
+        caseSize: "41mm × 10.8mm",
+        crystal: "Dual Anti-Reflective Sapphire",
+        waterResistance: "50M / 5 ATM",
+        strap: "Integrated Brushed Steel Bracelet",
+        powerReserve: "72 Hours",
+        story: "Our flagship skeleton silhouette. Symmetrical dark-rhodium bridges frame the oscillating escapement in high-contrast relief."
+      },
+      {
+        id: 9,
+        ref: "AUR-009",
+        name: "Aurelia Emerald Sub 300M",
+        subtitle: "Metallic Emerald Dial • Ceramic Dive Bezel",
+        category: "Diver",
+        price: 50900,
+        originalPrice: 58500,
+        badge: "NEW DROP",
+        image: "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-300 Diver Automatic",
+        caseSize: "41mm × 11.9mm",
+        crystal: "Sapphire with AR Coating",
+        waterResistance: "300M / 30 ATM",
+        strap: "Brushed 3-Link Oyster Steel",
+        powerReserve: "70 Hours",
+        story: "Deep metallic emerald sunray dial framed by a scratch-proof green ceramic bezel and solid 904L steel links."
+      },
+      {
+        id: 10,
+        ref: "AUR-010",
+        name: "Aurelia Eclipse Classic",
+        subtitle: "Jet Black Dial • Minimalist Steel Case",
+        category: "Dress",
+        price: 42500,
+        originalPrice: 49000,
+        badge: null,
+        image: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-88 Automatic",
+        caseSize: "40mm × 9.5mm",
+        crystal: "Double-Domed Sapphire",
+        waterResistance: "50M / 5 ATM",
+        strap: "Quick-Release Black Leather",
+        powerReserve: "68 Hours",
+        story: "Pure monochrome sophistication. High-polish hands slice cleanly across a deep jet-black dial."
+      },
+      {
+        id: 11,
+        ref: "AUR-011",
+        name: "Aurelia Silverline Auto",
+        subtitle: "Brushed Rhodium Dial • Fluted Bezel",
+        category: "Automatic",
+        price: 44900,
+        originalPrice: 52000,
+        badge: null,
+        image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-90 Automatic (28,800 vph)",
+        caseSize: "39mm × 9.6mm",
+        crystal: "Sapphire with AR Underside",
+        waterResistance: "100M / 10 ATM",
+        strap: "Polished Center-Link Steel",
+        powerReserve: "72 Hours",
+        story: "Crisp monochrome silver aesthetics built for seamless transition from office hours to late-night dinners."
+      },
+      {
+        id: 12,
+        ref: "AUR-012",
+        name: "Aurelia Nightfall Tachymeter",
+        subtitle: "Stealth Black Dial • Precision Stop-Watch",
+        category: "Chronograph",
+        price: 53500,
+        originalPrice: 61500,
+        badge: "BESTSELLER",
+        image: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=900&q=85",
+        movement: "Column-Wheel Mecha-Quartz Chronograph",
+        caseSize: "40mm × 11.5mm",
+        crystal: "Anti-Reflective Sapphire",
+        waterResistance: "100M / 10 ATM",
+        strap: "Brushed & Center-Polished Steel",
+        powerReserve: "60 Hours Chrono Reserve",
+        story: "Engineered for split-second timing with recessed chronograph sub-registers and luminous baton hands."
+      },
+      {
+        id: 13,
+        ref: "AUR-013",
+        name: "Aurelia Forge Titanium",
+        subtitle: "Industrial Open-Balance • FKM Rubber",
+        category: "Skeleton",
+        price: 58900,
+        originalPrice: 67000,
+        badge: "LIMITED",
+        image: "https://images.unsplash.com/photo-1639037687665-a252028612b1?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-79 Open-Balance Automatic",
+        caseSize: "42mm × 11.5mm",
+        crystal: "Sapphire Crystal",
+        waterResistance: "100M / 10 ATM",
+        strap: "Ventilated FKM Sport Rubber",
+        powerReserve: "72 Hours",
+        story: "Featherlight industrial case architecture paired with a sweat-proof FKM fluororubber strap."
+      },
+      {
+        id: 14,
+        ref: "AUR-014",
+        name: "Aurelia Stealth Marine",
+        subtitle: "Matte Gunmetal Case • 300M Rated",
+        category: "Diver",
+        price: 47500,
+        originalPrice: 54500,
+        badge: null,
+        image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-300 Diver Automatic",
+        caseSize: "41.5mm × 12.2mm",
+        crystal: "3.0mm Flat AR Sapphire",
+        waterResistance: "300M / 30 ATM",
+        strap: "All-Weather Tactical Strap",
+        powerReserve: "70 Hours",
+        story: "Zero-glare bead-blasted gunmetal finish built for rugged everyday durability."
+      },
+      {
+        id: 15,
+        ref: "AUR-015",
+        name: "Aurelia Sovereign Rose",
+        subtitle: "Warm Rose-Gold PVD • Chestnut Leather",
+        category: "Dress",
+        price: 37900,
+        originalPrice: 43500,
+        badge: null,
+        image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=900&q=85",
+        movement: "Calibre AU-18 Ultra-Thin Mechanical",
+        caseSize: "39mm × 7.2mm",
+        crystal: "Domed Sapphire Crystal",
+        waterResistance: "50M / 5 ATM",
+        strap: "Hand-Stitched Chestnut Calfskin",
+        powerReserve: "54 Hours",
+        story: "Warm rose-gold PVD case balanced by a crisp minimalist dial—tailored for weddings, formal nights, and gifting."
+      }
+    ];
+
+    const CATEGORIES = ["All", "Automatic", "Chronograph", "Skeleton", "Diver", "Dress"];
+
+    // State
+    let heroIndex = 0;
+    let selectedCategory = "All";
+    let sortBy = "featured";
+    let wishlistIds = [];
+    let bagItems = []; // [{ id, quantity }]
+
+    // Express Order Modal State
+    let expressWatch = null;
+    let expressOrderId = "";
+    let expressQty = 1;
+    let expressForm = {
+      name: "",
+      phone: "",
+      city: "Lahore",
+      address: "",
+      payment: "Cash on Delivery (COD)",
+      note: ""
+    };
+    let expressErrors = {};
+    let expressConfirmed = null;
+
+    // Bag Checkout State
+    let bagOrderId = "";
+    let bagForm = {
+      name: "",
+      phone: "",
+      city: "Lahore",
+      address: "",
+      payment: "Cash on Delivery (COD)",
+      note: ""
+    };
+    let bagErrors = {};
+    let bagConfirmed = null;
+    let toastTimer = null;
+
+    // Helpers
+    const formatPrice = (amount) => `${STORE_CONFIG.currency} ${Number(amount).toLocaleString("en-PK")}`;
+    const generateOrderId = () => `#AUR-${Math.floor(1000 + Math.random() * 9000)}`;
+    const getWatchById = (id) => WATCHES_DATA.find((w) => w.id === id);
+
+    const WA_ICON_SVG = `<svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>`;
+
+    // Load saved state from localStorage
+    function loadPersistedState() {
+      try {
+        const savedWishlist = JSON.parse(localStorage.getItem("aurelia_html_wishlist") || "[]");
+        if (Array.isArray(savedWishlist)) wishlistIds = savedWishlist;
+      } catch (e) {}
+
+      try {
+        const savedBag = JSON.parse(localStorage.getItem("aurelia_html_bag") || "[]");
+        if (Array.isArray(savedBag)) {
+          bagItems = savedBag.filter((item) => getWatchById(item.id));
+        }
+      } catch (e) {}
+    }
+
+    function savePersistedState() {
+      try {
+        localStorage.setItem("aurelia_html_wishlist", JSON.stringify(wishlistIds));
+        localStorage.setItem("aurelia_html_bag", JSON.stringify(bagItems));
+      } catch (e) {}
+    }
+
+    // Update Navbar & Mobile Bar Counters
+    function updateCounters() {
+      const totalBag = bagItems.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById("nav-bag-count").textContent = totalBag;
+      document.getElementById("mobile-bag-label").textContent = `Bag (${totalBag})`;
+
+      document.getElementById("nav-wishlist-count").textContent = wishlistIds.length;
+      document.getElementById("mobile-wishlist-label").textContent = `Saved (${wishlistIds.length})`;
+
+      const navHeart = document.getElementById("nav-heart-icon");
+      const mobHeart = document.getElementById("mobile-heart-icon");
+      if (wishlistIds.length > 0) {
+        navHeart.setAttribute("fill", "currentColor");
+        navHeart.classList.remove("text-zinc-300");
+        navHeart.classList.add("text-rose-500");
+        mobHeart.setAttribute("fill", "currentColor");
+        mobHeart.classList.remove("text-white");
+        mobHeart.classList.add("text-rose-500");
+      } else {
+        navHeart.setAttribute("fill", "none");
+        navHeart.classList.remove("text-rose-500");
+        navHeart.classList.add("text-zinc-300");
+        mobHeart.setAttribute("fill", "none");
+        mobHeart.classList.remove("text-rose-500");
+        mobHeart.classList.add("text-white");
+      }
+    }
+
+    // Hero Watch Spotlight Switcher
+    function setHeroWatch(index) {
+      heroIndex = index;
+      const w = WATCHES_DATA[heroIndex] || WATCHES_DATA[0];
+      document.getElementById("hero-watch-img").src = w.image;
+      document.getElementById("hero-watch-img").alt = w.name;
+      document.getElementById("hero-watch-ref").textContent = `${w.ref} // ${w.category.toUpperCase()}`;
+      document.getElementById("hero-watch-name").textContent = w.name;
+      document.getElementById("hero-watch-price").textContent = formatPrice(w.price);
+
+      document.getElementById("hero-image-trigger").onclick = () => openSpecsModal(w.id);
+      document.getElementById("hero-specs-btn").onclick = () => openSpecsModal(w.id);
+      document.getElementById("hero-order-btn").onclick = () => openExpressModal(w.id);
+
+      const dotsContainer = document.getElementById("hero-switcher-dots");
+      dotsContainer.innerHTML = [0, 1, 2]
+        .map(
+          (i) => `
+          <button type="button" onclick="setHeroWatch(${i})" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer ${
+            heroIndex === i
+              ? "bg-white text-black"
+              : "bg-black/70 text-zinc-300 hover:text-white border border-white/10"
+          }">0${i + 1}</button>
+        `
+        )
+        .join("");
+    }
+
+    // Render Category Pills
+    function renderCategoryFilters() {
+      const container = document.getElementById("category-filters");
+      container.innerHTML = CATEGORIES.map((cat) => {
+        const count =
+          cat === "All"
+            ? WATCHES_DATA.length
+            : WATCHES_DATA.filter((w) => w.category === cat).length;
+        const active = selectedCategory === cat;
+        return `
+          <button type="button" onclick="selectCategory('${cat}')" class="shrink-0 px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            active
+              ? "bg-white text-black"
+              : "bg-[#141417] hover:bg-[#1E1E22] text-zinc-400 hover:text-white border border-white/[0.07]"
+          }">
+            ${cat} (${count})
+          </button>
+        `;
+      }).join("");
+    }
+
+    function selectCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryFilters();
+      renderWatchesGrid();
+    }
+
+    function handleSortChange(val) {
+      sortBy = val;
+      renderWatchesGrid();
+    }
+
+    // Render 15-Watch Grid
+    function renderWatchesGrid() {
+      let list =
+        selectedCategory === "All"
+          ? [...WATCHES_DATA]
+          : WATCHES_DATA.filter((w) => w.category === selectedCategory);
+
+      if (sortBy === "price-asc") {
+        list.sort((a, b) => a.price - b.price);
+      } else if (sortBy === "price-desc") {
+        list.sort((a, b) => b.price - a.price);
+      }
+
+      const grid = document.getElementById("watches-grid");
+      grid.innerHTML = list
+        .map((watch, idx) => {
+          const isSaved = wishlistIds.includes(watch.id);
+          const discountPct = Math.round(
+            ((watch.originalPrice - watch.price) / watch.originalPrice) * 100
+          );
+
+          return `
+            <article style="transition-delay: ${(idx % 3) * 60}ms" class="reveal-card group h-full flex flex-col rounded-3xl bg-[#111114] border border-white/[0.08] hover:border-white/25 transition-all duration-300 overflow-hidden">
+              <div onclick="openSpecsModal(${watch.id})" class="relative aspect-[4/4] bg-[#18181B] overflow-hidden cursor-pointer">
+                <img src="${watch.image}" alt="${watch.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#111114] via-transparent to-black/20"></div>
+
+                ${
+                  watch.badge
+                    ? `<span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 font-mono-code text-[10px] font-bold uppercase tracking-wider text-white">${watch.badge}</span>`
+                    : ""
+                }
+
+                <button type="button" onclick="event.stopPropagation(); toggleWishlist(${watch.id})" aria-label="Save ${watch.name}" class="absolute top-3.5 right-3.5 z-10 p-2.5 rounded-full bg-black/70 hover:bg-black backdrop-blur-md border border-white/15 transition-transform active:scale-90 cursor-pointer">
+                  <svg viewBox="0 0 24 24" fill="${isSaved ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" class="w-4 h-4 ${isSaved ? "text-rose-500" : "text-white"}">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                  </svg>
+                </button>
+
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between">
+                  <span class="font-mono-code text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md text-zinc-200 border border-white/10">
+                    ${watch.caseSize.split("×")[0].trim()} • ${watch.waterResistance.split("/")[0].trim()}
+                  </span>
+                  <button type="button" onclick="event.stopPropagation(); openSpecsModal(${watch.id})" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/95 hover:bg-white text-black text-[11px] font-bold transition-colors cursor-pointer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3 h-3"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                    <span>Specs</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex-1 flex flex-col justify-between p-5 sm:p-6">
+                <div>
+                  <div class="flex items-center justify-between font-mono-code text-[11px] text-zinc-400">
+                    <span class="uppercase">${watch.category}</span>
+                    <span>${watch.ref}</span>
+                  </div>
+                  <h3 onclick="openSpecsModal(${watch.id})" class="mt-1.5 font-hype text-lg sm:text-xl font-bold text-white group-hover:text-emerald-400 transition-colors cursor-pointer leading-snug">
+                    ${watch.name}
+                  </h3>
+                  <p class="mt-1 text-xs text-zinc-400 line-clamp-1">${watch.subtitle}</p>
+                </div>
+
+                <div class="mt-5 pt-4 border-t border-white/[0.08]">
+                  <div class="flex items-end justify-between gap-2 mb-3.5">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-mono-code text-xs text-zinc-500 line-through">${formatPrice(watch.originalPrice)}</span>
+                        <span class="font-mono-code text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400">-${discountPct}%</span>
+                      </div>
+                      <span class="font-mono-code text-xl font-bold text-white block mt-0.5">${formatPrice(watch.price)}</span>
+                    </div>
+
+                    <button type="button" onclick="addToBag(${watch.id}, false)" class="px-3.5 py-2.5 rounded-xl bg-[#1A1A1E] hover:bg-white hover:text-black border border-white/10 text-white text-xs font-bold transition-all cursor-pointer">
+                      + Add to Bag
+                    </button>
+                  </div>
+
+                  <button type="button" onclick="openExpressModal(${watch.id})" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+                    ${WA_ICON_SVG}
+                    <span>Order on WhatsApp</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      observeRevealCards();
+    }
+
+    // IntersectionObserver for smooth scroll reveal
+    function observeRevealCards() {
+      const cards = document.querySelectorAll(".reveal-card");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.05 }
+      );
+      cards.forEach((c) => observer.observe(c));
+    }
+
+    // Smooth Scroll
+    function scrollToSection(id, category = null) {
+      if (category) {
+        selectedCategory = category;
+        renderCategoryFilters();
+        renderWatchesGrid();
+      }
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Wishlist Actions
+    function toggleWishlist(watchId) {
+      const w = getWatchById(watchId);
+      if (!w) return;
+      const idx = wishlistIds.indexOf(watchId);
+      if (idx > -1) {
+        wishlistIds.splice(idx, 1);
+        showToast("Removed from Saved", w.name);
+      } else {
+        wishlistIds.push(watchId);
+        showToast("Saved to Wishlist", w.name);
+      }
+      savePersistedState();
+      updateCounters();
+      renderWatchesGrid();
+      if (!document.getElementById("wishlist-drawer").classList.contains("hidden")) {
+        renderWishlistDrawer();
+      }
+    }
+
+    // Bag Actions
+    function addToBag(watchId, openDrawer = false) {
+      const w = getWatchById(watchId);
+      if (!w) return;
+      bagConfirmed = null;
+      const existing = bagItems.find((i) => i.id === watchId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        bagItems.push({ id: watchId, quantity: 1 });
+      }
+      savePersistedState();
+      updateCounters();
+      if (openDrawer) {
+        openBagDrawer();
+      } else {
+        showToast(`${w.name} added to Bag`, "Open Concierge Bag to checkout together");
+      }
+    }
+
+    function updateBagQty(watchId, delta) {
+      const item = bagItems.find((i) => i.id === watchId);
+      if (!item) return;
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        bagItems = bagItems.filter((i) => i.id !== watchId);
+      }
+      savePersistedState();
+      updateCounters();
+      renderBagDrawer();
+    }
+
+    function removeBagItem(watchId) {
+      bagItems = bagItems.filter((i) => i.id !== watchId);
+      savePersistedState();
+      updateCounters();
+      renderBagDrawer();
+    }
+
+    // Specs Modal
+    function openSpecsModal(watchId) {
+      const w = getWatchById(watchId);
+      if (!w) return;
+      const modal = document.getElementById("specs-modal");
+      const content = document.getElementById("specs-modal-content");
+
+      const specs = [
+        { label: "Movement", value: w.movement },
+        { label: "Case Size", value: w.caseSize },
+        { label: "Crystal", value: w.crystal },
+        { label: "Water Rating", value: w.waterResistance },
+        { label: "Strap / Bracelet", value: w.strap },
+        { label: "Power Reserve", value: w.powerReserve }
+      ];
+
+      content.innerHTML = `
+        <button type="button" onclick="closeSpecsModal()" aria-label="Close specs" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/70 hover:bg-black border border-white/15 text-white cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-12">
+          <div class="md:col-span-5 bg-[#18181B] flex items-center justify-center overflow-hidden min-h-[280px]">
+            <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
+          </div>
+
+          <div class="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="flex items-center gap-2.5 font-mono-code text-xs text-emerald-400">
+                <span class="font-bold uppercase">${w.category}</span>
+                <span>•</span>
+                <span>${w.ref}</span>
+              </div>
+              <h3 class="mt-1.5 font-hype text-2xl sm:text-3xl font-extrabold text-white">${w.name}</h3>
+              <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">${w.story}</p>
+
+              <div class="mt-6 grid grid-cols-2 gap-3">
+                ${specs
+                  .map(
+                    (s) => `
+                  <div class="p-3 rounded-2xl bg-[#18181B] border border-white/[0.08]">
+                    <span class="block font-mono-code text-[10px] font-bold uppercase tracking-wider text-zinc-400">${s.label}</span>
+                    <span class="mt-1 block text-xs font-semibold text-white">${s.value}</span>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+
+            <div class="pt-5 border-t border-white/10 space-y-4">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-xs text-zinc-400 block">Collector Box &amp; 2-Year Warranty Included</span>
+                  <span class="font-mono-code text-xs text-zinc-500 line-through">${formatPrice(w.originalPrice)}</span>
+                </div>
+                <span class="font-mono-code text-2xl font-bold text-white">${formatPrice(w.price)}</span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button type="button" onclick="closeSpecsModal(); openExpressModal(${w.id})" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
+                  ${WA_ICON_SVG}
+                  <span>Order on WhatsApp</span>
+                </button>
+                <button type="button" onclick="closeSpecsModal(); addToBag(${w.id}, true)" class="py-3.5 px-5 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
+                  <span>Add to Bag</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSpecsModal() {
+      document.getElementById("specs-modal").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    // Express Single-Watch WhatsApp Order Modal
+    function openExpressModal(watchId) {
+      const w = getWatchById(watchId);
+      if (!w) return;
+      closeWishlistDrawer();
+      expressWatch = w;
+      expressOrderId = generateOrderId();
+      expressQty = 1;
+      expressErrors = {};
+      expressConfirmed = null;
+      renderExpressModal();
+      document.getElementById("express-modal").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeExpressModal() {
+      document.getElementById("express-modal").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    function buildSingleWhatsAppMessage() {
+      if (!expressWatch) return "";
+      const total = expressWatch.price * expressQty;
+      const cleanName = expressForm.name.trim() || "[Customer Name]";
+      const cleanPhone = expressForm.phone.trim() ? `\n• Mobile / WhatsApp: ${expressForm.phone.trim()}` : "";
+      const cleanCity = expressForm.city.trim() || "Lahore";
+      const cleanAddress = expressForm.address.trim() || "[Complete Street Address]";
+      const noteLine = expressForm.note.trim() ? `\n• Gift / Wrist Note: ${expressForm.note.trim()}` : "";
+
+      return (
+        `Assalam-o-Alaikum ${STORE_CONFIG.storeName} Concierge! I want to place an order:\n\n` +
+        `• Order Reference: ${expressOrderId}\n` +
+        `• Watch: ${expressWatch.name} (${expressWatch.ref})\n` +
+        `• Quantity: ${expressQty}\n` +
+        `• Total Amount: ${formatPrice(total)} (${STORE_CONFIG.freeShippingNote})\n` +
+        `• Payment Method: ${expressForm.payment}\n\n` +
+        `Delivery Details:\n` +
+        `• Full Name: ${cleanName}${cleanPhone}\n` +
+        `• City: ${cleanCity}\n` +
+        `• Address: ${cleanAddress}${noteLine}\n\n` +
+        `Please confirm stock and dispatch timeline. Thank you!`
+      );
+    }
+
+    function updateExpressLivePreview() {
+      const pre = document.getElementById("express-live-preview");
+      if (pre) pre.textContent = buildSingleWhatsAppMessage();
+    }
+
+    function setExpressQty(delta) {
+      expressQty = Math.max(1, expressQty + delta);
+      renderExpressModal();
+    }
+
+    function setExpressCity(city) {
+      expressForm.city = city;
+      renderExpressModal();
+    }
+
+    function setExpressPayment(method) {
+      expressForm.payment = method;
+      renderExpressModal();
+    }
+
+    function submitExpressOrder(e) {
+      e.preventDefault();
+      if (!expressWatch) return;
+
+      const errs = {};
+      if (!expressForm.name.trim()) errs.name = "Please enter your full name for the courier parcel.";
+      if (!expressForm.address.trim()) errs.address = "Please enter your complete street address.";
+
+      if (Object.keys(errs).length > 0) {
+        expressErrors = errs;
+        renderExpressModal();
+        return;
+      }
+
+      expressErrors = {};
+      const message = buildSingleWhatsAppMessage();
+      const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
+      expressConfirmed = {
+        orderId: expressOrderId,
+        watchName: expressWatch.name,
+        qty: expressQty,
+        total: expressWatch.price * expressQty,
+        customerName: expressForm.name.trim(),
+        city: expressForm.city.trim() || "Lahore",
+        payment: expressForm.payment,
+        message,
+        waUrl
+      };
+      renderExpressModal();
+    }
+
+    function renderExpressModal() {
+      if (!expressWatch) return;
+      const content = document.getElementById("express-modal-content");
+
+      if (expressConfirmed) {
+        content.innerHTML = `
+          <div class="space-y-5 py-2">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-6 h-6"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+                <div>
+                  <span class="font-mono-code text-xs font-bold text-emerald-400">ORDER ${expressConfirmed.orderId}</span>
+                  <h3 class="font-hype text-xl sm:text-2xl font-extrabold text-white">Order Ready on WhatsApp!</h3>
+                </div>
+              </div>
+              <button type="button" onclick="closeExpressModal()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
+            </div>
+
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              WhatsApp has opened with your order receipt for <strong class="text-white">${expressConfirmed.watchName}</strong>. Tap <strong>Send</strong> in WhatsApp to confirm dispatch!
+            </p>
+
+            <div class="p-4 rounded-2xl bg-[#18181B] border border-white/10 space-y-2 text-xs">
+              <div class="flex justify-between">
+                <span class="text-zinc-400">Recipient:</span>
+                <span class="font-bold text-white">${expressConfirmed.customerName} (${expressConfirmed.city})</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-zinc-400">Payment Method:</span>
+                <span class="font-bold text-white">${expressConfirmed.payment}</span>
+              </div>
+              <div class="flex justify-between pt-2 border-t border-white/10">
+                <span class="font-bold text-white">Total Payable:</span>
+                <span class="font-mono-code font-bold text-emerald-400">${formatPrice(expressConfirmed.total)}</span>
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] font-bold text-emerald-400">Formatted WhatsApp Receipt</span>
+                <button type="button" onclick="copyText(expressConfirmed.message)" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold cursor-pointer">
+                  <span>Copy Receipt</span>
+                </button>
+              </div>
+              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${expressConfirmed.message}</pre>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-1">
+              <a href="${expressConfirmed.waUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors">
+                ${WA_ICON_SVG}
+                <span>Re-open WhatsApp</span>
+              </a>
+              <button type="button" onclick="closeExpressModal()" class="py-3.5 px-5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm cursor-pointer">
+                Done
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      content.innerHTML = `
+        <div class="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Direct WhatsApp Checkout
+              </span>
+              <span class="font-mono-code text-[11px] font-semibold px-2 py-0.5 rounded bg-white/10 text-zinc-200">${expressOrderId}</span>
+            </div>
+            <h3 class="mt-1 font-hype text-xl sm:text-2xl font-extrabold text-white">Place Your Order</h3>
+          </div>
+          <button type="button" onclick="closeExpressModal()" aria-label="Close checkout" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="mt-4 p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
+          <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+            <img src="${expressWatch.image}" alt="${expressWatch.name}" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-mono-code text-[11px] font-semibold text-zinc-400">${expressWatch.ref}</span>
+            <h4 class="font-hype text-base font-bold text-white truncate">${expressWatch.name}</h4>
+            <div class="mt-1.5 flex items-center justify-between gap-2">
+              <span class="font-mono-code text-sm font-bold text-emerald-400">${formatPrice(expressWatch.price * expressQty)}</span>
+              <div class="flex items-center gap-2 bg-[#09090B] border border-white/15 rounded-lg px-2 py-0.5">
+                <button type="button" onclick="setExpressQty(-1)" class="text-white p-0.5 cursor-pointer font-bold">-</button>
+                <span class="font-mono-code text-xs font-bold w-4 text-center">${expressQty}</span>
+                <button type="button" onclick="setExpressQty(1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form onsubmit="submitExpressOrder(event)" class="mt-4 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-zinc-200 mb-1">Full Name <span class="text-rose-400">*</span></label>
+              <input type="text" value="${escapeHtml(expressForm.name)}" oninput="expressForm.name = this.value; updateExpressLivePreview()" placeholder="e.g. Usman Tariq" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${expressErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+              ${expressErrors.name ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${expressErrors.name}</p>` : ""}
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-zinc-200 mb-1">Mobile / WhatsApp <span class="text-zinc-500 font-normal">(Optional)</span></label>
+              <input type="tel" value="${escapeHtml(expressForm.phone)}" oninput="expressForm.phone = this.value; updateExpressLivePreview()" placeholder="e.g. 0300-1234567" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-zinc-200 mb-1.5">Delivery City</label>
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              ${STORE_CONFIG.deliveryCities
+                .map(
+                  (c) => `
+                <button type="button" onclick="setExpressCity('${c}')" class="px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
+                    expressForm.city === c
+                      ? "bg-white text-black border-white"
+                      : "bg-[#18181B] hover:bg-white/10 text-zinc-300 border-white/10"
+                  }">${c}</button>
+              `
+                )
+                .join("")}
+            </div>
+            <input type="text" value="${escapeHtml(expressForm.city)}" oninput="expressForm.city = this.value; updateExpressLivePreview()" placeholder="Or type any city in Pakistan" class="w-full px-3.5 py-2 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-zinc-200 mb-1">Complete Street Address <span class="text-rose-400">*</span></label>
+            <input type="text" value="${escapeHtml(expressForm.address)}" oninput="expressForm.address = this.value; updateExpressLivePreview()" placeholder="House #, Street / Sector / Block, Landmark" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${expressErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+            ${expressErrors.address ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${expressErrors.address}</p>` : ""}
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-zinc-200 mb-1.5">Payment Method</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${["Cash on Delivery (COD)", "Online Bank Transfer"]
+                .map(
+                  (m) => `
+                <button type="button" onclick="setExpressPayment('${m}')" class="p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    expressForm.payment === m
+                      ? "bg-emerald-500/15 border-emerald-400 text-white"
+                      : "bg-[#18181B] hover:bg-white/5 border-white/10 text-zinc-400"
+                  }">${m}</button>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-zinc-200 mb-1">Gift Note or Wrist Size Adjustment <span class="text-zinc-500 font-normal">(Optional)</span></label>
+            <input type="text" value="${escapeHtml(expressForm.note)}" oninput="expressForm.note = this.value; updateExpressLivePreview()" placeholder="e.g. Add gift wrap / adjust bracelet for 7-inch wrist" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+          </div>
+
+          <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-emerald-400">Live WhatsApp Order Preview</span>
+              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${expressOrderId}</span>
+            </div>
+            <pre id="express-live-preview" class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${buildSingleWhatsAppMessage()}</pre>
+          </div>
+
+          <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+            ${WA_ICON_SVG}
+            <span>Confirm &amp; Send Order on WhatsApp</span>
+          </button>
+        </form>
+      `;
+    }
+
+    // Bag Drawer
+    function openBagDrawer() {
+      bagConfirmed = null;
+      bagOrderId = generateOrderId();
+      bagErrors = {};
+      renderBagDrawer();
+      document.getElementById("bag-drawer").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeBagDrawer() {
+      document.getElementById("bag-drawer").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    function submitBagOrder(e) {
+      e.preventDefault();
+      if (bagItems.length === 0) return;
+
+      const errs = {};
+      if (!bagForm.name.trim()) errs.name = "Please enter your full name.";
+      if (!bagForm.address.trim()) errs.address = "Please enter your complete delivery address.";
+
+      if (Object.keys(errs).length > 0) {
+        bagErrors = errs;
+        renderBagDrawer();
+        return;
+      }
+
+      bagErrors = {};
+      const lines = bagItems
+        .map((item, idx) => {
+          const w = getWatchById(item.id);
+          return `${idx + 1}. ${w.name} (${w.ref}) × ${item.quantity} — ${formatPrice(w.price * item.quantity)}`;
+        })
+        .join("\n");
+
+      const subtotal = bagItems.reduce((sum, item) => sum + getWatchById(item.id).price * item.quantity, 0);
+      const cleanPhone = bagForm.phone.trim() ? `\n• Mobile / WhatsApp: ${bagForm.phone.trim()}` : "";
+      const noteLine = bagForm.note.trim() ? `\n• Gift / Wrist Note: ${bagForm.note.trim()}` : "";
+
+      const message =
+        `Assalam-o-Alaikum ${STORE_CONFIG.storeName} Concierge! I want to place a multi-watch order:\n\n` +
+        `• Order Reference: ${bagOrderId}\n` +
+        `${lines}\n\n` +
+        `• Grand Total: ${formatPrice(subtotal)} (${STORE_CONFIG.freeShippingNote})\n` +
+        `• Payment Method: ${bagForm.payment}\n\n` +
+        `Delivery Details:\n` +
+        `• Full Name: ${bagForm.name.trim()}${cleanPhone}\n` +
+        `• City: ${bagForm.city.trim() || "Lahore"}\n` +
+        `• Address: ${bagForm.address.trim()}${noteLine}\n\n` +
+        `Please confirm availability and share dispatch details. Thank you!`;
+
+      const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
+      bagConfirmed = { orderId: bagOrderId, message, waUrl };
+      bagItems = [];
+      savePersistedState();
+      updateCounters();
+      renderBagDrawer();
+    }
+
+    function renderBagDrawer() {
+      const content = document.getElementById("bag-drawer-content");
+      const totalCount = bagItems.reduce((s, i) => s + i.quantity, 0);
+      const subtotal = bagItems.reduce((s, i) => s + getWatchById(i.id).price * i.quantity, 0);
+      const savings = bagItems.reduce(
+        (s, i) => s + (getWatchById(i.id).originalPrice - getWatchById(i.id).price) * i.quantity,
+        0
+      );
+
+      let bodyHtml = "";
+      if (bagConfirmed) {
+        bodyHtml = `
+          <div class="space-y-4 py-2">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-6 h-6"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <span class="font-mono-code text-xs font-bold text-emerald-400">${bagConfirmed.orderId}</span>
+                <h4 class="font-hype text-xl font-extrabold text-white">Order Ready on WhatsApp!</h4>
+              </div>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              WhatsApp has opened with your multi-watch order summary. Tap <strong>Send</strong> in WhatsApp to confirm dispatch!
+            </p>
+            <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] font-bold text-emerald-400">Order Receipt</span>
+                <button type="button" onclick="copyText(bagConfirmed.message)" class="px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">Copy Receipt</button>
+              </div>
+              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${bagConfirmed.message}</pre>
+            </div>
+            <a href="${bagConfirmed.waUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2">
+              ${WA_ICON_SVG}
+              <span>Re-open WhatsApp</span>
+            </a>
+          </div>
+        `;
+      } else if (bagItems.length === 0) {
+        bodyHtml = `
+          <div class="h-full flex flex-col items-center justify-center text-center py-12">
+            <h4 class="font-hype text-xl font-extrabold text-white">Your Bag is Empty</h4>
+            <p class="mt-1.5 text-xs text-zinc-400 max-w-xs leading-relaxed">
+              Add one or more watches to checkout together in one WhatsApp message.
+            </p>
+            <button type="button" onclick="closeBagDrawer(); scrollToSection('collection')" class="mt-6 px-6 py-3 rounded-xl bg-white text-black text-xs font-bold cursor-pointer">
+              Explore Watches
+            </button>
+          </div>
+        `;
+      } else {
+        const itemsHtml = bagItems
+          .map(({ id, quantity }) => {
+            const w = getWatchById(id);
+            return `
+              <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
+                <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+                  <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-start justify-between gap-2">
+                    <h4 class="font-hype text-sm font-bold text-white truncate">${w.name}</h4>
+                    <button type="button" onclick="removeBagItem(${w.id})" class="text-zinc-500 hover:text-rose-400 p-1 cursor-pointer text-xs">✕</button>
+                  </div>
+                  <span class="font-mono-code text-[11px] text-zinc-400 block">${w.ref}</span>
+                  <div class="mt-2 flex items-center justify-between">
+                    <span class="font-mono-code text-xs font-bold text-emerald-400">${formatPrice(w.price * quantity)}</span>
+                    <div class="flex items-center gap-2 bg-[#09090B] border border-white/15 rounded-lg px-2 py-0.5">
+                      <button type="button" onclick="updateBagQty(${w.id}, -1)" class="text-white p-0.5 cursor-pointer font-bold">-</button>
+                      <span class="font-mono-code text-xs font-bold w-4 text-center">${quantity}</span>
+                      <button type="button" onclick="updateBagQty(${w.id}, 1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+        bodyHtml = `
+          <div class="space-y-3">${itemsHtml}</div>
+          <form id="bag-checkout-form" onsubmit="submitBagOrder(event)" class="pt-4 border-t border-white/10 space-y-3">
+            <div class="flex items-center justify-between">
+              <p class="text-xs font-bold text-white">Delivery Details</p>
+              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${bagOrderId}</span>
+            </div>
+            <div>
+              <input type="text" value="${escapeHtml(bagForm.name)}" oninput="bagForm.name = this.value" placeholder="Full Name *" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${bagErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs text-white placeholder-zinc-500 focus:outline-none" />
+              ${bagErrors.name ? `<p class="mt-1 text-[11px] text-rose-400">${bagErrors.name}</p>` : ""}
+            </div>
+            <input type="tel" value="${escapeHtml(bagForm.phone)}" oninput="bagForm.phone = this.value" placeholder="Mobile / WhatsApp Number (Optional)" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
+            <div class="flex flex-wrap gap-1.5">
+              ${STORE_CONFIG.deliveryCities
+                .slice(0, 6)
+                .map(
+                  (c) => `<button type="button" onclick="bagForm.city='${c}'; renderBagDrawer()" class="px-2 py-1 rounded-md text-[11px] font-semibold border cursor-pointer ${bagForm.city === c ? "bg-white text-black border-white" : "bg-[#18181B] text-zinc-300 border-white/10"}">${c}</button>`
+                )
+                .join("")}
+            </div>
+            <input type="text" value="${escapeHtml(bagForm.city)}" oninput="bagForm.city = this.value" placeholder="Delivery City" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
+            <div>
+              <input type="text" value="${escapeHtml(bagForm.address)}" oninput="bagForm.address = this.value" placeholder="Complete Street Address *" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${bagErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs text-white placeholder-zinc-500 focus:outline-none" />
+              ${bagErrors.address ? `<p class="mt-1 text-[11px] text-rose-400">${bagErrors.address}</p>` : ""}
+            </div>
+            <select onchange="bagForm.payment = this.value" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs font-semibold text-white focus:outline-none">
+              <option value="Cash on Delivery (COD)" ${bagForm.payment === "Cash on Delivery (COD)" ? "selected" : ""}>Payment: Cash on Delivery (COD)</option>
+              <option value="Online Bank Transfer" ${bagForm.payment === "Online Bank Transfer" ? "selected" : ""}>Payment: Online Bank Transfer</option>
+            </select>
+            <input type="text" value="${escapeHtml(bagForm.note)}" oninput="bagForm.note = this.value" placeholder="Optional Gift Note / Wrist Adjustment" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
+          </form>
+        `;
+      }
+
+      const footerHtml =
+        !bagConfirmed && bagItems.length > 0
+          ? `
+            <div class="p-5 sm:p-6 border-t border-white/10 bg-[#09090B] space-y-3.5">
+              <div class="space-y-1.5 text-xs">
+                ${savings > 0 ? `<div class="flex justify-between text-emerald-400 font-semibold"><span>Drop Savings</span><span>-${formatPrice(savings)}</span></div>` : ""}
+                <div class="flex justify-between text-zinc-400"><span>Insured Express Delivery</span><span class="font-bold text-emerald-400">FREE</span></div>
+                <div class="flex justify-between items-baseline pt-1.5 border-t border-white/10">
+                  <span class="text-sm font-bold text-white">Grand Total</span>
+                  <span class="font-mono-code text-lg font-bold text-white">${formatPrice(subtotal)}</span>
+                </div>
+              </div>
+              <button type="submit" form="bag-checkout-form" class="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
+                ${WA_ICON_SVG}
+                <span>Confirm &amp; Send Order on WhatsApp</span>
+              </button>
+            </div>
+          `
+          : "";
+
+      content.innerHTML = `
+        <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <h3 class="font-hype text-lg font-extrabold text-white">Your Bag</h3>
+            <p class="text-xs text-zinc-400">${bagConfirmed ? `Order ${bagConfirmed.orderId}` : `${totalCount} watch(es) selected`}</p>
+          </div>
+          <button type="button" onclick="closeBagDrawer()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5">${bodyHtml}</div>
+        ${footerHtml}
+      `;
+    }
+
+    // Wishlist Drawer
+    function openWishlistDrawer() {
+      renderWishlistDrawer();
+      document.getElementById("wishlist-drawer").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeWishlistDrawer() {
+      document.getElementById("wishlist-drawer").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    function renderWishlistDrawer() {
+      const content = document.getElementById("wishlist-drawer-content");
+      const savedList = WATCHES_DATA.filter((w) => wishlistIds.includes(w.id));
+
+      const bodyHtml =
+        savedList.length === 0
+          ? `
+            <div class="h-full flex flex-col items-center justify-center text-center py-12">
+              <h4 class="font-hype text-xl font-extrabold text-white">No Saved Watches</h4>
+              <p class="mt-1.5 text-xs text-zinc-400 max-w-xs">Tap the heart icon on any watch card to save your favorites here.</p>
+            </div>
+          `
+          : savedList
+              .map(
+                (w) => `
+              <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
+                <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+                  <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="font-mono-code text-[11px] text-zinc-400">${w.ref}</span>
+                  <h4 class="font-hype text-sm font-bold text-white truncate">${w.name}</h4>
+                  <span class="font-mono-code text-xs font-bold text-emerald-400 block mt-0.5">${formatPrice(w.price)}</span>
+                  <div class="mt-2 flex items-center gap-2">
+                    <button type="button" onclick="openExpressModal(${w.id})" class="px-3 py-1 rounded-lg bg-emerald-500 text-black text-[11px] font-bold cursor-pointer">Order Now</button>
+                    <button type="button" onclick="addToBag(${w.id}, false)" class="px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">+ Bag</button>
+                    <button type="button" onclick="toggleWishlist(${w.id})" class="text-[11px] text-zinc-500 hover:text-rose-400 cursor-pointer">Remove</button>
+                  </div>
+                </div>
+              </div>
+            `
+              )
+              .join("");
+
+      content.innerHTML = `
+        <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <h3 class="font-hype text-lg font-extrabold text-white">Saved Watches</h3>
+            <p class="text-xs text-zinc-400">${savedList.length} saved timepiece(s)</p>
+          </div>
+          <button type="button" onclick="closeWishlistDrawer()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3">${bodyHtml}</div>
+      `;
+    }
+
+    // Mobile Menu Drawer
+    function openMobileMenu() {
+      document.getElementById("mobile-menu-drawer").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+    function closeMobileMenu() {
+      document.getElementById("mobile-menu-drawer").classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    // Direct WhatsApp Concierge Chat
+    function openDirectConcierge() {
+      const msg = `Assalam-o-Alaikum ${STORE_CONFIG.storeName}! I'm checking out your 2026 watch collection and need help choosing a piece.`;
+      window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    }
+
+    // Copy Receipt Helper
+    function copyText(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Order Receipt Copied", "Paste directly into WhatsApp anytime");
+        });
+      }
+    }
+
+    // Toast Notification
+    function showToast(title, subtitle = "") {
+      const container = document.getElementById("toast-container");
+      document.getElementById("toast-title").textContent = title;
+      document.getElementById("toast-subtitle").textContent = subtitle;
+      container.classList.remove("hidden");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(hideToast, 3200);
+    }
+
+    function hideToast() {
+      document.getElementById("toast-container").classList.add("hidden");
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // Scroll Header Effect
+    window.addEventListener(
+      "scroll",
+      () => {
+        const header = document.getElementById("main-header");
+        if (window.scrollY > 18) {
+          header.classList.add("backdrop-blur-2xl", "bg-[#09090B]/80", "shadow-[0_12px_40px_rgba(0,0,0,0.75)]", "py-3");
+          header.classList.remove("backdrop-blur-xl", "bg-[#09090B]/45", "py-4");
+        } else {
+          header.classList.remove("backdrop-blur-2xl", "bg-[#09090B]/80", "shadow-[0_12px_40px_rgba(0,0,0,0.75)]", "py-3");
+          header.classList.add("backdrop-blur-xl", "bg-[#09090B]/45", "py-4");
+        }
+      },
+      { passive: true }
+    );
+
+    // Escape key closes modals/drawers
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeSpecsModal();
+        closeExpressModal();
+        closeBagDrawer();
+        closeWishlistDrawer();
+        closeMobileMenu();
+      }
+    });
+
+    // Initialize Store on Load
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("footer-year").textContent = new Date().getFullYear();
+      loadPersistedState();
+      updateCounters();
+      setHeroWatch(0);
+      renderCategoryFilters();
+      renderWatchesGrid();
+    });
+  </script>
+</body>
+</html>
