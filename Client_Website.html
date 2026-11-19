@@ -4,24 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AURELIA — Gen-Z Hype Luxury Watch Store</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='0' y='0' width='40' height='40' rx='12' fill='%23FAFAFA'/%3E%3Ccircle cx='20' cy='20' r='15' fill='none' stroke='%2309090B' stroke-width='1' stroke-dasharray='2 2' opacity='0.3'/%3E%3Ctext x='20' y='24.5' text-anchor='middle' font-family='Syne, Arial, sans-serif' font-weight='800' font-size='14.5' letter-spacing='0.5' fill='%2309090B'%3EHF%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
-    html, body {
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
       width: 100%;
-      max-width: 100vw;
+      max-width: 100%;
       overflow-x: clip;
       overscroll-behavior-x: none;
-      touch-action: pan-y;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #09090B;
       color: #FAFAFA;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding-bottom: 5rem;
+      overflow-x: clip;
+      overscroll-behavior-x: none;
       position: relative;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-bottom: 0;
+      }
     }
 
     .font-hype {
@@ -117,20 +134,20 @@
     }
   </style>
 </head>
-<body class="w-full max-w-full min-h-screen bg-[#09090B] text-[#FAFAFA] selection:bg-emerald-500 selection:text-black pb-20 md:pb-0 overflow-x-clip">
+<body class="bg-[#09090B] text-[#FAFAFA] selection:bg-emerald-500 selection:text-black">
 
   <!-- =====================================================================
        1. EDGE-LESS GLASSY NAVBAR (COMPACT ON MOBILE / CORNER-LESS EDGE)
   ====================================================================== -->
-  <header id="main-header" class="fixed md:sticky top-0 inset-x-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/80 md:bg-[#09090B]/55 py-2.5 sm:py-4">
-    <div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 min-w-0">
+  <header id="main-header" class="fixed md:sticky top-0 left-0 right-0 z-40 w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/90 md:bg-[#09090B]/55 py-2.5 sm:py-4">
+    <div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-1.5 min-w-0">
       <!-- Brand Monogram -->
       <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
         <div class="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 flex items-center justify-center">
-          <svg viewBox="0 0 40 40" fill="none" class="w-full h-full transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" class="w-full h-full transition-transform duration-300 group-hover:scale-105" aria-label="HF Logo">
             <rect x="0" y="0" width="40" height="40" rx="12" fill="#FAFAFA" />
             <circle cx="20" cy="20" r="14.5" stroke="#09090B" stroke-width="1" stroke-dasharray="2 2" opacity="0.35" class="animate-gear-slow" />
-            <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
+            <text x="20" y="24.5" text-anchor="middle" font-family="'Syne', sans-serif" font-weight="800" font-size="14.5" letter-spacing="0.5" fill="#09090B">HF</text>
           </svg>
         </div>
         <div class="min-w-0">
@@ -420,9 +437,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-7 sm:gap-8 pb-7 sm:pb-9">
         <div class="sm:col-span-2 md:col-span-5 space-y-3">
           <div class="flex items-center gap-2.5">
-            <svg viewBox="0 0 40 40" fill="none" class="w-8 h-8 shrink-0" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" class="w-8 h-8 shrink-0" aria-label="HF Logo">
               <rect x="0" y="0" width="40" height="40" rx="12" fill="#FAFAFA" />
-              <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
+              <circle cx="20" cy="20" r="14.5" stroke="#09090B" stroke-width="1" stroke-dasharray="2 2" opacity="0.3" />
+              <text x="20" y="24.5" text-anchor="middle" font-family="'Syne', sans-serif" font-weight="800" font-size="14.5" letter-spacing="0.5" fill="#09090B">HF</text>
             </svg>
             <div>
               <span class="font-hype text-base sm:text-lg font-extrabold tracking-[0.12em] text-white block leading-none">AURELIA</span>
@@ -490,7 +508,7 @@
   <!-- =====================================================================
        MOBILE FLOATING BOTTOM BAR
   ====================================================================== -->
-  <nav aria-label="Mobile Quick Actions" class="md:hidden fixed bottom-0 inset-x-0 z-40 w-full max-w-full bg-[#09090B]/95 backdrop-blur-2xl border-t border-white/10 px-1.5 py-1.5 grid grid-cols-4 gap-1">
+  <nav aria-label="Mobile Quick Actions" class="md:hidden fixed bottom-0 left-0 right-0 z-40 w-full bg-[#09090B]/95 backdrop-blur-2xl border-t border-white/10 px-1.5 py-1.5 grid grid-cols-4 gap-1">
     <button type="button" onclick="scrollToSection('collection')" class="flex flex-col items-center justify-center py-1 rounded-xl text-zinc-300 min-w-0">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white shrink-0"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
       <span class="text-[10px] font-semibold mt-0.5 truncate">Watches</span>
@@ -2122,10 +2140,10 @@
           if (!header) return;
           if (window.scrollY > 18) {
             header.className =
-              "fixed md:sticky top-0 inset-x-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-2xl bg-[#09090B]/90 md:bg-[#09090B]/85 shadow-[0_12px_40px_rgba(0,0,0,0.75)] py-2 sm:py-3";
+              "fixed md:sticky top-0 left-0 right-0 z-40 w-full border-0 transition-all duration-300 backdrop-blur-2xl bg-[#09090B]/95 md:bg-[#09090B]/85 shadow-[0_12px_40px_rgba(0,0,0,0.75)] py-2 sm:py-3";
           } else {
             header.className =
-              "fixed md:sticky top-0 inset-x-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/80 md:bg-[#09090B]/55 py-2.5 sm:py-4";
+              "fixed md:sticky top-0 left-0 right-0 z-40 w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/90 md:bg-[#09090B]/55 py-2.5 sm:py-4";
           }
         },
         { passive: true }
@@ -2143,4 +2161,4 @@
     });
   </script>
 </body>
-<!-- </html> -->
+</html>
