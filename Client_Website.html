@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0/">
-
-  <title>HF Collection</title>
-
-  <!-- Tailwind CSS CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURELIA — Gen-Z Hype Luxury Watch Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Syne + Plus Jakarta Sans + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -47,6 +38,21 @@
       100% { transform: translateX(0); }
     }
 
+    @keyframes gearSpinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes gearSpinReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes pulseAura {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.06); }
+    }
+
     .animate-hero-card {
       animation: subtleFloat 6s ease-in-out infinite;
     }
@@ -59,18 +65,33 @@
       animation: drawerSlideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Scroll reveal states */
-    .reveal-card {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+    .animate-gear-slow {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: gearSpinSlow 24s linear infinite;
     }
-    .reveal-card.is-visible {
+
+    .animate-gear-reverse {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: gearSpinReverse 16s linear infinite;
+    }
+
+    .animate-pulse-aura {
+      animation: pulseAura 4.5s ease-in-out infinite;
+    }
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal-item.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -87,22 +108,25 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#09090B] text-[#FAFAFA] selection:bg-emerald-500 selection:text-black pb-20 md:pb-0 overflow-x-hidden">
+<body class="w-full max-w-full min-h-screen bg-[#09090B] text-[#FAFAFA] selection:bg-emerald-500 selection:text-black pb-20 md:pb-0 overflow-x-clip">
 
   <!-- =====================================================================
-       1. EDGE-LESS GLASSY NAVBAR (NO BORDERS / NO SEARCH BAR)
+       1. EDGE-LESS GLASSY NAVBAR (COMPACT ON MOBILE / CORNER-LESS EDGE)
   ====================================================================== -->
-  <header id="main-header" class="sticky top-0 z-40 border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/45 py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+  <header id="main-header" class="sticky top-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/55 py-2.5 sm:py-4">
+    <div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 min-w-0">
       <!-- Brand Monogram -->
-      <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="flex items-center gap-3 group shrink-0">
-        <svg viewBox="0 0 40 40" fill="none" class="w-9 h-9 transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
-          <rect x="1" y="1" width="38" height="38" rx="11" fill="#FAFAFA" />
-          <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
-        </svg>
-        <div>
-          <span id="nav-store-name" class="font-hype text-lg sm:text-xl font-extrabold tracking-[0.12em] text-white block leading-none">HF</span>
-          <span id="nav-tagline" class="font-mono-code text-[10px] tracking-[0.2em] text-zinc-400 block mt-1">HF Collection</span>
+      <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 flex items-center justify-center">
+          <svg viewBox="0 0 40 40" fill="none" class="w-full h-full transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
+            <rect x="0" y="0" width="40" height="40" rx="12" fill="#FAFAFA" />
+            <circle cx="20" cy="20" r="14.5" stroke="#09090B" stroke-width="1" stroke-dasharray="2 2" opacity="0.35" class="animate-gear-slow" />
+            <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <span id="nav-store-name" class="font-hype text-sm sm:text-xl font-extrabold tracking-[0.1em] sm:tracking-[0.12em] text-white block leading-none truncate">AURELIA</span>
+          <span id="nav-tagline" class="font-mono-code text-[8px] sm:text-[10px] tracking-[0.14em] sm:tracking-[0.2em] text-zinc-400 block mt-0.5 sm:mt-1 truncate">GENEVA // STUDIO</span>
         </div>
       </a>
 
@@ -113,26 +137,26 @@
         <button type="button" onclick="openDirectConcierge()" class="hover:text-emerald-400 transition-colors cursor-pointer">Live Concierge</button>
       </nav>
 
-      <!-- Right Action Buttons -->
-      <div class="flex items-center gap-2 sm:gap-2.5">
+      <!-- Right Action Buttons (Compact & Never Overflowing on Narrow Screens) -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         <!-- Saved Wishlist Pill -->
-        <button type="button" onclick="openWishlistDrawer()" aria-label="Saved Wishlist" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] backdrop-blur-xl text-zinc-200 transition-all cursor-pointer">
-          <svg id="nav-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-zinc-300">
+        <button type="button" onclick="openWishlistDrawer()" aria-label="Saved Wishlist" class="flex items-center gap-1 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] backdrop-blur-xl text-zinc-200 transition-all cursor-pointer">
+          <svg id="nav-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-300">
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
           <span class="hidden lg:inline text-xs font-semibold">Saved</span>
-          <span id="nav-wishlist-count" class="font-mono-code text-[11px] font-bold px-1.5 rounded-full bg-white/10 text-white">0</span>
+          <span id="nav-wishlist-count" class="font-mono-code text-[10px] sm:text-[11px] font-bold px-1.5 rounded-full bg-white/10 text-white">0</span>
         </button>
 
         <!-- Bag Pill -->
-        <button type="button" onclick="openBagDrawer()" aria-label="Concierge Bag" class="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-black hover:bg-zinc-200 transition-all cursor-pointer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+        <button type="button" onclick="openBagDrawer()" aria-label="Concierge Bag" class="flex items-center gap-1 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-white text-black hover:bg-zinc-200 transition-all cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 sm:w-4 sm:h-4">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
             <path d="M3 6h18" />
             <path d="M16 10a4 4 0 0 1-8 0" />
           </svg>
           <span class="hidden sm:inline text-xs font-bold">Bag</span>
-          <span id="nav-bag-count" class="font-mono-code min-w-[20px] h-5 px-1.5 rounded-full bg-black text-white text-[11px] font-bold flex items-center justify-center">0</span>
+          <span id="nav-bag-count" class="font-mono-code min-w-[18px] h-4 sm:h-5 px-1 rounded-full bg-black text-white text-[10px] sm:text-[11px] font-bold flex items-center justify-center">0</span>
         </button>
 
         <!-- Direct WhatsApp Button -->
@@ -144,8 +168,8 @@
         </button>
 
         <!-- Mobile Menu Button -->
-        <button type="button" onclick="openMobileMenu()" aria-label="Open menu" class="md:hidden p-2.5 rounded-full bg-white/[0.07] text-white cursor-pointer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+        <button type="button" onclick="openMobileMenu()" aria-label="Open menu" class="md:hidden p-2 rounded-full bg-white/[0.07] text-white cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
             <line x1="4" x2="20" y1="7" y2="7" />
             <line x1="4" x2="20" y1="12" y2="12" />
             <line x1="4" x2="20" y1="17" y2="17" />
@@ -156,48 +180,57 @@
   </header>
 
   <!-- =====================================================================
-       2. GEN-Z HYPE HERO SECTION (SOLID #09090B CANVAS)
+       2. GEN-Z HYPE HERO SECTION (SOLID #09090B CANVAS + ANIMATED CALIBRE SVG)
   ====================================================================== -->
-  <section class="relative pt-8 pb-14 sm:pt-14 sm:pb-20 bg-[#09090B]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+  <section class="relative w-full max-w-full pt-6 pb-12 sm:pt-14 sm:pb-20 bg-[#09090B]">
+    <!-- Subtle Animated Horological Gear Aura Graphic -->
+    <div aria-hidden="true" class="pointer-events-none absolute -top-10 -right-16 w-72 h-72 sm:w-96 sm:h-96 opacity-[0.07] animate-pulse-aura">
+      <svg viewBox="0 0 200 200" fill="none" class="w-full h-full">
+        <circle cx="100" cy="100" r="82" stroke="#FAFAFA" stroke-width="1.5" stroke-dasharray="6 6" class="animate-gear-slow" />
+        <circle cx="100" cy="100" r="56" stroke="#34D399" stroke-width="1.2" stroke-dasharray="4 5" class="animate-gear-reverse" />
+        <circle cx="100" cy="100" r="28" stroke="#FAFAFA" stroke-width="1.5" class="animate-gear-slow" />
+      </svg>
+    </div>
+
+    <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-center">
         <!-- Left Typography Column -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left min-w-0">
           <!-- Live Drop Pill -->
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#141417] border border-white/10">
-            <span class="relative flex h-2 w-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141417] border border-white/10 max-w-full">
+            <span class="relative flex h-2 w-2 shrink-0">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span class="font-mono-code text-[11px] font-semibold uppercase tracking-widest text-zinc-300">
-              
+            <span class="font-mono-code text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider sm:tracking-widest text-zinc-300 truncate">
+              DROP 01 // 2026 • OPEN-PARCEL COD
             </span>
           </div>
 
           <!-- Bold Gen-Z Syne Headline -->
-          <h1 class="font-hype text-4xl sm:text-6xl lg:text-[66px] font-extrabold tracking-[-0.04em] text-white uppercase leading-[0.98]">
+          <h1 class="font-hype text-3xl sm:text-6xl lg:text-[66px] font-extrabold tracking-[-0.04em] text-white uppercase leading-[0.98] break-words">
             CRAFTED FOR
             <span class="block text-zinc-400 mt-1">THE NEW ERA.</span>
           </h1>
 
           <!-- Clean Subheadline -->
-          <p class="max-w-lg mx-auto lg:mx-0 text-sm sm:text-base text-zinc-400 leading-relaxed">
-             heavy-metal automatic, skeleton, and chronograph pieces built with 904L steel &amp;
+          <p class="max-w-lg mx-auto lg:mx-0 text-xs sm:text-base text-zinc-400 leading-relaxed">
+            15 heavy-metal automatic, skeleton, and chronograph pieces built with 904L steel &amp;
             sapphire crystal. Inspect your parcel at your doorstep before paying.
           </p>
 
           <!-- High-Contrast Hype CTAs -->
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
-            <button type="button" onclick="scrollToSection('collection')" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
-              <span>Shop All Watches</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-1">
+            <button type="button" onclick="scrollToSection('collection')" class="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+              <span>Shop All 15 Watches</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0">
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
             </button>
 
-            <button type="button" onclick="openDirectConcierge()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
-              <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+            <button type="button" onclick="openDirectConcierge()" class="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+              <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true">
                 <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
               </svg>
               <span>Order on WhatsApp</span>
@@ -205,52 +238,54 @@
           </div>
 
           <!-- Minimal Mono Trust Strip -->
-          <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 font-mono-code text-[11px] text-zinc-400">
+          <div class="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 sm:gap-x-6 gap-y-2 font-mono-code text-[10px] sm:text-[11px] text-zinc-400">
             <span>[01] 904L STEEL</span>
             <span>[02] SAPPHIRE GLASS</span>
             <span>[03] 2-YR WARRANTY</span>
-            <span>[04]  COD</span>
+            <span>[04] FREE COD</span>
           </div>
         </div>
 
         <!-- Right Studio Flagship Watch Spotlight Card -->
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="animate-hero-card w-full max-w-sm rounded-3xl bg-[#111114] border border-white/10 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]">
-            <div id="hero-image-trigger" class="relative aspect-[4/4] bg-[#18181B] overflow-hidden cursor-pointer group">
+        <div class="lg:col-span-5 flex justify-center w-full min-w-0">
+          <div class="animate-hero-card w-full max-w-[340px] sm:max-w-sm rounded-3xl bg-[#111114] border border-white/10 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.85)]">
+            <div onclick="openHeroSpecs()" class="relative aspect-[4/4] bg-[#18181B] overflow-hidden cursor-pointer group">
               <img id="hero-watch-img" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85" alt="Aurelia Carbon Chrono" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div class="absolute inset-0 bg-gradient-to-t from-[#111114] via-transparent to-black/25"></div>
 
-              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
-                <span id="hero-watch-ref" class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white border border-white/15">
+              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
+                <span id="hero-watch-ref" class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white border border-white/15 truncate">
                   AUR-001 // CHRONOGRAPH
                 </span>
-                <span class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500 text-black">
+                <span class="font-mono-code text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500 text-black shrink-0">
                   IN STOCK
                 </span>
               </div>
 
-              <!-- Quick Switcher Dots -->
               <div onclick="event.stopPropagation()" class="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
-                <div id="hero-switcher-dots" class="flex items-center gap-1.5">
-                  <button type="button" onclick="setHeroWatch(0)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-white text-black">01</button>
-                  <button type="button" onclick="setHeroWatch(1)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">02</button>
-                  <button type="button" onclick="setHeroWatch(2)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">03</button>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" id="hero-dot-0" onclick="setHeroWatch(0)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-white text-black">01</button>
+                  <button type="button" id="hero-dot-1" onclick="setHeroWatch(1)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">02</button>
+                  <button type="button" id="hero-dot-2" onclick="setHeroWatch(2)" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10">03</button>
                 </div>
 
-                <button type="button" id="hero-specs-btn" class="px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-white hover:bg-black cursor-pointer">
+                <button type="button" onclick="openHeroSpecs()" class="px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-white hover:bg-black cursor-pointer">
                   Specs
                 </button>
               </div>
             </div>
 
-            <!-- Spotlight Footer -->
-            <div class="p-5 flex items-center justify-between gap-3">
+            <div class="p-4 sm:p-5 flex items-center justify-between gap-3">
               <div class="min-w-0">
-                <h2 id="hero-watch-name" class="font-hype text-base font-bold text-white truncate">Aurelia Carbon Chrono</h2>
-                <p id="hero-watch-price" class="font-mono-code text-sm font-bold text-emerald-400 mt-0.5">Rs. 46,500</p>
+                <h2 id="hero-watch-name" class="font-hype text-sm sm:text-base font-bold text-white truncate">
+                  Aurelia Carbon Chrono
+                </h2>
+                <p id="hero-watch-price" class="font-mono-code text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">
+                  Rs. 46,500
+                </p>
               </div>
 
-              <button type="button" id="hero-order-btn" class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all cursor-pointer">
+              <button type="button" id="hero-order-btn" onclick="openExpressOrder(1)" class="shrink-0 inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all cursor-pointer">
                 <svg viewBox="0 0 32 32" fill="currentColor" class="w-3.5 h-3.5" aria-hidden="true">
                   <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
                 </svg>
@@ -266,22 +301,22 @@
   <!-- =====================================================================
        3. STRAIGHT TO THE 15 WATCHES (SOLID #09090B)
   ====================================================================== -->
-  <section id="collection" class="py-10 sm:py-16 bg-[#09090B]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="collection" class="w-full max-w-full py-10 sm:py-16 bg-[#09090B]">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header + Filter & Sort Bar -->
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
         <div>
-          <span class="font-mono-code text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">
+          <span class="font-mono-code text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">
             THE LINEUP // 15 PIECES
           </span>
-          <h2 class="mt-1.5 font-hype text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white uppercase">
+          <h2 class="mt-1.5 font-hype text-2xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white uppercase">
             SELECT YOUR PIECE
           </h2>
         </div>
 
         <!-- Category Filter Pills & Sort -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <div id="category-filters" class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 min-w-0">
+          <div id="category-filters" class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 max-w-full">
             <!-- Populated dynamically -->
           </div>
 
@@ -294,7 +329,7 @@
               <line x1="21" x2="16" y1="20" y2="20" />
               <line x1="12" x2="3" y1="20" y2="20" />
             </svg>
-            <select id="sort-select" onchange="handleSortChange(this.value)" aria-label="Sort watches" class="px-3 py-2 rounded-xl bg-[#141417] border border-white/10 text-xs font-semibold text-white focus:outline-none cursor-pointer">
+            <select id="sort-select" onchange="handleSortChange(this.value)" aria-label="Sort watches" class="w-full sm:w-auto px-3 py-2 rounded-xl bg-[#141417] border border-white/10 text-xs font-semibold text-white focus:outline-none cursor-pointer">
               <option value="featured">Featured</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
@@ -304,7 +339,7 @@
       </div>
 
       <!-- 3-Column Solid Dark Watch Grid -->
-      <div id="watches-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="watches-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         <!-- Populated dynamically -->
       </div>
     </div>
@@ -313,14 +348,14 @@
   <!-- =====================================================================
        4. MINIMAL 3-STEP WHATSAPP ORDER GUIDE (SOLID #0E0E11)
   ====================================================================== -->
-  <section id="order-guide" class="py-16 bg-[#0E0E11] border-t border-white/[0.06]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+  <section id="order-guide" class="w-full max-w-full py-12 sm:py-16 bg-[#0E0E11] border-t border-white/[0.06]">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-10">
         <div>
-          <span class="font-mono-code text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
+          <span class="font-mono-code text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
             ZERO FRICTION
           </span>
-          <h2 class="mt-1 font-hype text-2xl sm:text-4xl font-extrabold text-white uppercase">
+          <h2 class="mt-1 font-hype text-xl sm:text-4xl font-extrabold text-white uppercase">
             HOW WHATSAPP ORDERING WORKS
           </h2>
         </div>
@@ -329,26 +364,35 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
-          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 01</span>
-          <h3 class="mt-2 font-hype text-lg font-bold text-white">Tap Order on WhatsApp</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        <div class="p-5 sm:p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 01</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-5 h-5 text-emerald-400/80 animate-gear-slow"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3 class="mt-2 font-hype text-base sm:text-lg font-bold text-white">Tap Order on WhatsApp</h3>
           <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
             Pick any of the 15 watches or bundle multiple pieces inside your Bag.
           </p>
         </div>
 
-        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
-          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 02</span>
-          <h3 class="mt-2 font-hype text-lg font-bold text-white">Enter City &amp; Address</h3>
+        <div class="p-5 sm:p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 02</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-5 h-5 text-emerald-400/80"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="mt-2 font-hype text-base sm:text-lg font-bold text-white">Enter City &amp; Address</h3>
           <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
             Preview your formatted order receipt with a unique #AUR order ID.
           </p>
         </div>
 
-        <div class="p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
-          <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 03</span>
-          <h3 class="mt-2 font-hype text-lg font-bold text-white">Open-Parcel COD</h3>
+        <div class="p-5 sm:p-6 rounded-3xl bg-[#141417] border border-white/[0.07]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono-code text-xs font-bold text-emerald-400">STEP // 03</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-5 h-5 text-emerald-400/80"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="mt-2 font-hype text-base sm:text-lg font-bold text-white">Open-Parcel COD</h3>
           <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
             Inspect your watch at your doorstep before paying cash on delivery.
           </p>
@@ -358,37 +402,38 @@
   </section>
 
   <!-- =====================================================================
-       5. SOLID CHARCOAL FOOTER (#050507)
+       5. COMPACT EDGE-LESS CHARCOAL FOOTER (#050507)
   ====================================================================== -->
-  <footer class="bg-[#050507] text-zinc-400 border-t border-white/[0.08] py-14">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-white/[0.08]">
-        <div class="md:col-span-5 space-y-4">
-          <div class="flex items-center gap-3">
-            <svg viewBox="0 0 40 40" fill="none" class="w-9 h-9" aria-hidden="true">
-              <rect x="1" y="1" width="38" height="38" rx="11" fill="#FAFAFA" />
+  <footer class="relative w-full max-w-full bg-[#050507] text-zinc-400 py-8 sm:py-12">
+    <div aria-hidden="true" class="pointer-events-none inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-7 sm:gap-8 pb-7 sm:pb-9">
+        <div class="sm:col-span-2 md:col-span-5 space-y-3">
+          <div class="flex items-center gap-2.5">
+            <svg viewBox="0 0 40 40" fill="none" class="w-8 h-8 shrink-0" aria-hidden="true">
+              <rect x="0" y="0" width="40" height="40" rx="12" fill="#FAFAFA" />
               <path d="M20 9.5L27.5 30H24.2L22.5 25.1H17.5L15.8 30H12.5L20 9.5ZM18.4 22.3H21.6L20 17.3L18.4 22.3Z" fill="#09090B" />
             </svg>
             <div>
-              <span class="font-hype text-xl font-extrabold tracking-[0.12em] text-white block">HF</span>
-              <span class="font-mono-code text-[10px] tracking-[0.2em] text-zinc-400">Premium Collection</span>
+              <span class="font-hype text-base sm:text-lg font-extrabold tracking-[0.12em] text-white block leading-none">AURELIA</span>
+              <span class="font-mono-code text-[9px] sm:text-[10px] tracking-[0.18em] text-zinc-400 block mt-1">GENEVA // STUDIO</span>
             </div>
           </div>
-          <p class="text-xs sm:text-sm text-zinc-400 max-w-sm leading-relaxed">
-            Limited-batch automatic, skeleton, chronograph, and diver watches shipped
-            nationwide with Insured Open-Parcel Cash on Delivery.
+          <p class="text-xs text-zinc-400 max-w-sm leading-relaxed">
+            Automatic, skeleton, chronograph, and diver watches with Insured Open-Parcel Cash on Delivery.
           </p>
-          <button type="button" onclick="openDirectConcierge()" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-colors cursor-pointer">
-            <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+          <button type="button" onclick="openDirectConcierge()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-colors cursor-pointer">
+            <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true">
               <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
             </svg>
-            <span>WhatsApp </span>
+            <span>WhatsApp Concierge</span>
           </button>
         </div>
 
-        <div class="md:col-span-3 space-y-3">
-          <h4 class="font-mono-code text-xs font-bold uppercase tracking-widest text-white">Categories</h4>
-          <ul class="space-y-2 text-xs sm:text-sm">
+        <div class="md:col-span-3 space-y-2.5">
+          <h4 class="font-mono-code text-[11px] font-bold uppercase tracking-widest text-white">Categories</h4>
+          <ul class="flex flex-wrap sm:flex-col gap-x-4 gap-y-1.5 text-xs">
             <li><button type="button" onclick="scrollToSection('collection', 'Automatic')" class="hover:text-white transition-colors cursor-pointer">Automatic</button></li>
             <li><button type="button" onclick="scrollToSection('collection', 'Chronograph')" class="hover:text-white transition-colors cursor-pointer">Chronograph</button></li>
             <li><button type="button" onclick="scrollToSection('collection', 'Skeleton')" class="hover:text-white transition-colors cursor-pointer">Skeleton</button></li>
@@ -397,28 +442,28 @@
           </ul>
         </div>
 
-        <div class="md:col-span-4 space-y-3">
-          <h4 class="font-mono-code text-xs font-bold uppercase tracking-widest text-white">Dispatch &amp; Support</h4>
-          <ul class="space-y-2.5 text-xs sm:text-sm">
-            <li class="flex items-center gap-2.5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="md:col-span-4 space-y-2.5">
+          <h4 class="font-mono-code text-[11px] font-bold uppercase tracking-widest text-white">Dispatch &amp; Support</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 text-emerald-400 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               <span>Daily • 11:00 AM – 11:00 PM PKT</span>
             </li>
-            <li class="flex items-center gap-2.5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            <li class="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 text-emerald-400 shrink-0"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
               <span>Free Insured Express Delivery Nationwide</span>
             </li>
-            <li class="flex items-center gap-2.5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-emerald-400 shrink-0"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            <li class="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 text-emerald-400 shrink-0"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
               <span>7-Day Inspection &amp; 2-Year Warranty</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-        <p>© <span id="footer-year">2026</span> HF Collection All rights reserved.</p>
-        <p class="font-mono-code text-zinc-400">OPEN-PARCEL COD // DIRECT WHATSAPP CHECKOUT</p>
+      <div class="pt-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-zinc-500 text-center sm:text-left">
+        <p>© <span id="footer-year">2026</span> AURELIA. All rights reserved.</p>
+        <p class="font-mono-code text-zinc-400 text-[10px]">OPEN-PARCEL COD // WHATSAPP CHECKOUT</p>
       </div>
     </div>
   </footer>
@@ -430,34 +475,33 @@
     <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
       <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
     </svg>
-    <span>WhatsApp </span>
+    <span>WhatsApp Concierge</span>
   </button>
 
   <!-- =====================================================================
        MOBILE FLOATING BOTTOM BAR
   ====================================================================== -->
-  <nav aria-label="Mobile Quick Actions" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#09090B]/95 backdrop-blur-2xl border-t border-white/10 px-2 py-2 grid grid-cols-4 gap-1">
-    <button type="button" onclick="scrollToSection('collection')" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
-      <span class="text-[10px] font-semibold mt-1">Watches</span>
+  <nav aria-label="Mobile Quick Actions" class="md:hidden fixed bottom-0 inset-x-0 z-40 w-full max-w-full bg-[#09090B]/95 backdrop-blur-2xl border-t border-white/10 px-1.5 py-1.5 grid grid-cols-4 gap-1">
+    <button type="button" onclick="scrollToSection('collection')" class="flex flex-col items-center justify-center py-1 rounded-xl text-zinc-300 min-w-0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white shrink-0"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+      <span class="text-[10px] font-semibold mt-0.5 truncate">Watches</span>
     </button>
 
-    <button type="button" onclick="openWishlistDrawer()" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
-      <svg id="mobile-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-      <span id="mobile-wishlist-label" class="text-[10px] font-semibold mt-1">Saved (0)</span>
+    <button type="button" onclick="openWishlistDrawer()" class="flex flex-col items-center justify-center py-1 rounded-xl text-zinc-300 min-w-0">
+      <svg id="mobile-heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      <span id="mobile-wishlist-label" class="text-[10px] font-semibold mt-0.5 truncate">Saved (0)</span>
     </button>
 
-    <button type="button" onclick="openBagDrawer()" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-zinc-300">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      <span id="mobile-bag-label" class="text-[10px] font-semibold mt-1">Bag (0)</span>
-    </button><meta name="view<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-port" content="width=device-width, initial-scale=1.0">
+    <button type="button" onclick="openBagDrawer()" class="flex flex-col items-center justify-center py-1 rounded-xl text-zinc-300 min-w-0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-white shrink-0"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span id="mobile-bag-label" class="text-[10px] font-semibold mt-0.5 truncate">Bag (0)</span>
+    </button>
 
-
-    <button type="button" onclick="openDirectConcierge()" class="flex flex-col items-center justify-center py-1.5 rounded-xl bg-emerald-500 text-black">
-      <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>
-      <span class="text-[10px] font-bold mt-1">WhatsApp</span>
+    <button type="button" onclick="openDirectConcierge()" class="flex flex-col items-center justify-center py-1 rounded-xl bg-emerald-500 text-black min-w-0">
+      <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true">
+        <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+      </svg>
+      <span class="text-[10px] font-bold mt-0.5 truncate">WhatsApp</span>
     </button>
   </nav>
 
@@ -465,28 +509,24 @@ port" content="width=device-width, initial-scale=1.0">
        MOBILE HAMBURGER DRAWER
   ====================================================================== -->
   <div id="mobile-menu-drawer" onclick="closeMobileMenu()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
-    <div onclick="event.stopPropagation()" class="animate-drawer-slide w-72 h-full bg-[#111114] border-l border-white/10 p-6 flex flex-col justify-between">
+    <div onclick="event.stopPropagation()" class="animate-drawer-slide w-72 max-w-[85vw] h-full bg-[#111114] border-l border-white/10 p-5 flex flex-col justify-between">
       <div>
-        <div class="flex items-center justify-between pb-5 border-b border-white/10">
-          <span class="font-hype text-lg font-extrabold text-white">HF Collection</span>
+        <div class="flex items-center justify-between pb-4 border-b border-white/10">
+          <span class="font-hype text-base font-extrabold text-white">AURELIA</span>
           <button type="button" onclick="closeMobileMenu()" class="p-2 rounded-full bg-white/10 text-white">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
-
-        <div class="mt-6 flex flex-col gap-2.5">
-          <button type="button" onclick="closeMobileMenu(); scrollToSection('collection')" class="text-left px-4 py-3 rounded-2xl bg-white/10 text-sm font-bold text-white">
-            Collection
-          </button>
-          <button type="button" onclick="closeMobileMenu(); scrollToSection('order-guide')" class="text-left px-4 py-3 rounded-2xl hover:bg-white/5 text-sm font-semibold text-zinc-300">
-            How WhatsApp Ordering Works
-          </button>
+        <div class="mt-5 flex flex-col gap-2">
+          <button type="button" onclick="scrollToSection('collection')" class="text-left px-4 py-3 rounded-2xl bg-white/10 text-sm font-bold text-white">15-Piece Collection</button>
+          <button type="button" onclick="scrollToSection('order-guide')" class="text-left px-4 py-3 rounded-2xl hover:bg-white/5 text-sm font-semibold text-zinc-300">How WhatsApp Ordering Works</button>
         </div>
       </div>
-
-      <button type="button" onclick="closeMobileMenu(); openDirectConcierge()" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 text-black text-xs font-bold flex items-center justify-center gap-2">
-        <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>
-        <span>WhatsApp </span>
+      <button type="button" onclick="closeMobileMenu(); openDirectConcierge();" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 text-black text-xs font-bold flex items-center justify-center gap-2">
+        <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+          <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+        </svg>
+        <span>WhatsApp Concierge</span>
       </button>
     </div>
   </div>
@@ -494,35 +534,35 @@ port" content="width=device-width, initial-scale=1.0">
   <!-- =====================================================================
        QUICK-VIEW HOROLOGICAL SPECS MODAL
   ====================================================================== -->
-  <div id="specs-modal" onclick="closeSpecsModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+  <div id="specs-modal" onclick="closeSpecsModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md">
     <div id="specs-modal-content" onclick="event.stopPropagation()" class="animate-modal-pop relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#111114] border border-white/15 shadow-2xl">
       <!-- Populated dynamically -->
     </div>
   </div>
 
   <!-- =====================================================================
-       END-TO-END WHATSAPP EXPRESS ORDER PLACEMENT MODAL
+       END-TO-END WHATSAPP EXPRESS ORDER MODAL
   ====================================================================== -->
-  <div id="express-modal" onclick="closeExpressModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div id="express-modal-content" onclick="event.stopPropagation()" class="animate-modal-pop relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#111114] border border-white/15 p-6 sm:p-7 shadow-2xl text-white">
+  <div id="express-order-modal" onclick="closeExpressModal()" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md">
+    <div id="express-order-content" onclick="event.stopPropagation()" class="animate-modal-pop relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#111114] border border-white/15 p-4 sm:p-7 shadow-2xl text-white">
       <!-- Populated dynamically -->
     </div>
   </div>
 
   <!-- =====================================================================
-       MULTI-WATCH CONCIERGE BAG SLIDE-OVER DRAWER
+       MULTI-WATCH CONCIERGE BAG DRAWER
   ====================================================================== -->
   <div id="bag-drawer" onclick="closeBagDrawer()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
-    <div id="bag-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
+    <div id="bag-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md max-w-[95vw] h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
       <!-- Populated dynamically -->
     </div>
   </div>
 
   <!-- =====================================================================
-       SAVED WISHLIST SLIDE-OVER DRAWER
+       SAVED WISHLIST DRAWER
   ====================================================================== -->
   <div id="wishlist-drawer" onclick="closeWishlistDrawer()" class="hidden fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm">
-    <div id="wishlist-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
+    <div id="wishlist-drawer-content" onclick="event.stopPropagation()" class="animate-drawer-slide relative w-full max-w-md max-w-[95vw] h-full bg-[#111114] border-l border-white/10 flex flex-col justify-between shadow-2xl text-white">
       <!-- Populated dynamically -->
     </div>
   </div>
@@ -530,8 +570,8 @@ port" content="width=device-width, initial-scale=1.0">
   <!-- =====================================================================
        NON-INTRUSIVE TOAST NOTIFICATION
   ====================================================================== -->
-  <div id="toast-container" class="hidden fixed bottom-20 md:bottom-7 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md">
-    <div class="animate-modal-pop flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-[#18181B] text-white shadow-2xl border border-white/15">
+  <div id="toast-container" class="hidden fixed bottom-20 md:bottom-7 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md pointer-events-none">
+    <div class="pointer-events-auto animate-modal-pop flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-[#18181B] text-white shadow-2xl border border-white/15">
       <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-4 h-4"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
@@ -546,16 +586,13 @@ port" content="width=device-width, initial-scale=1.0">
   </div>
 
   <!-- =====================================================================
-       APPLICATION JAVASCRIPT LOGIC
+       APPLICATION JAVASCRIPT (15 WATCHES + WHATSAPP CHECKOUT + STATE)
   ====================================================================== -->
   <script>
-    /**
-     * 1. STORE CONFIGURATION (EDIT YOUR WHATSAPP NUMBER HERE)
-     */
     const STORE_CONFIG = {
       storeName: "AURELIA",
       tagline: "GENEVA // STUDIO",
-      whatsappNumber: "923096580489", // Replace with your WhatsApp number (e.g., 923001234567)
+      whatsappNumber: "923001234567",
       currency: "Rs.",
       deliveryCities: [
         "Lahore",
@@ -568,12 +605,9 @@ port" content="width=device-width, initial-scale=1.0">
         "Gujrat",
         "Peshawar"
       ],
-      freeShippingNote: "Delivery Nationwide"
+      freeShippingNote: "Free Insured Express Delivery Nationwide"
     };
 
-    /**
-     * 2. ALL 15 CURATED LUXURY WATCHES
-     */
     const WATCHES_DATA = [
       {
         id: 1,
@@ -849,193 +883,237 @@ port" content="width=device-width, initial-scale=1.0">
 
     const CATEGORIES = ["All", "Automatic", "Chronograph", "Skeleton", "Diver", "Dress"];
 
-    // State
-    let heroIndex = 0;
-    let selectedCategory = "All";
-    let sortBy = "featured";
-    let wishlistIds = [];
-    let bagItems = []; // [{ id, quantity }]
-
-    // Express Order Modal State
-    let expressWatch = null;
-    let expressOrderId = "";
-    let expressQty = 1;
-    let expressForm = {
-      name: "",
-      phone: "",
-      city: "Lahore",
-      address: "",
-      payment: "Cash on Delivery (COD)",
-      note: ""
+    const state = {
+      heroIndex: 0,
+      selectedCategory: "All",
+      sortBy: "featured",
+      bagItems: [],
+      wishlistIds: [],
+      expressWatchId: null,
+      expressOrderId: generateOrderId(),
+      expressQty: 1,
+      expressForm: {
+        name: "",
+        phone: "",
+        city: "Lahore",
+        address: "",
+        payment: "Cash on Delivery (COD)",
+        note: ""
+      },
+      expressErrors: {},
+      expressConfirmed: null,
+      bagOrderId: generateOrderId(),
+      bagForm: {
+        name: "",
+        phone: "",
+        city: "Lahore",
+        address: "",
+        payment: "Cash on Delivery (COD)",
+        note: ""
+      },
+      bagErrors: {},
+      bagConfirmed: null
     };
-    let expressErrors = {};
-    let expressConfirmed = null;
 
-    // Bag Checkout State
-    let bagOrderId = "";
-    let bagForm = {
-      name: "",
-      phone: "",
-      city: "Lahore",
-      address: "",
-      payment: "Cash on Delivery (COD)",
-      note: ""
-    };
-    let bagErrors = {};
-    let bagConfirmed = null;
     let toastTimer = null;
 
-    // Helpers
-    const formatPrice = (amount) => `${STORE_CONFIG.currency} ${Number(amount).toLocaleString("en-PK")}`;
-    const generateOrderId = () => `#AUR-${Math.floor(1000 + Math.random() * 9000)}`;
-    const getWatchById = (id) => WATCHES_DATA.find((w) => w.id === id);
+    function formatPrice(amount) {
+      return `${STORE_CONFIG.currency} ${Number(amount).toLocaleString("en-PK")}`;
+    }
 
-    const WA_ICON_SVG = `<svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z"/></svg>`;
+    function generateOrderId() {
+      return `#AUR-${Math.floor(1000 + Math.random() * 9000)}`;
+    }
 
-    // Load saved state from localStorage
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function showToast(title, subtitle = "") {
+      const container = document.getElementById("toast-container");
+      const titleEl = document.getElementById("toast-title");
+      const subEl = document.getElementById("toast-subtitle");
+      if (!container || !titleEl || !subEl) return;
+
+      titleEl.textContent = title;
+      subEl.textContent = subtitle;
+      container.classList.remove("hidden");
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        container.classList.add("hidden");
+      }, 3200);
+    }
+
+    function hideToast() {
+      const container = document.getElementById("toast-container");
+      if (container) container.classList.add("hidden");
+    }
+
     function loadPersistedState() {
-      try {
-        const savedWishlist = JSON.parse(localStorage.getItem("aurelia_html_wishlist") || "[]");
-        if (Array.isArray(savedWishlist)) wishlistIds = savedWishlist;
-      } catch (e) {}
-
       try {
         const savedBag = JSON.parse(localStorage.getItem("aurelia_html_bag") || "[]");
         if (Array.isArray(savedBag)) {
-          bagItems = savedBag.filter((item) => getWatchById(item.id));
+          state.bagItems = savedBag
+            .map((entry) => {
+              const found = WATCHES_DATA.find((w) => w.id === entry.id);
+              return found ? { watch: found, quantity: Math.max(1, Number(entry.quantity) || 1) } : null;
+            })
+            .filter(Boolean);
+        }
+      } catch (e) {}
+
+      try {
+        const savedWish = JSON.parse(localStorage.getItem("aurelia_html_wishlist") || "[]");
+        if (Array.isArray(savedWish)) {
+          state.wishlistIds = savedWish.filter((id) => WATCHES_DATA.some((w) => w.id === id));
         }
       } catch (e) {}
     }
 
     function savePersistedState() {
       try {
-        localStorage.setItem("aurelia_html_wishlist", JSON.stringify(wishlistIds));
-        localStorage.setItem("aurelia_html_bag", JSON.stringify(bagItems));
+        localStorage.setItem(
+          "aurelia_html_bag",
+          JSON.stringify(state.bagItems.map((i) => ({ id: i.watch.id, quantity: i.quantity })))
+        );
+        localStorage.setItem("aurelia_html_wishlist", JSON.stringify(state.wishlistIds));
       } catch (e) {}
     }
 
-    // Update Navbar & Mobile Bar Counters
-    function updateCounters() {
-      const totalBag = bagItems.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById("nav-bag-count").textContent = totalBag;
-      document.getElementById("mobile-bag-label").textContent = `Bag (${totalBag})`;
+    function getBagCount() {
+      return state.bagItems.reduce((sum, i) => sum + i.quantity, 0);
+    }
 
-      document.getElementById("nav-wishlist-count").textContent = wishlistIds.length;
-      document.getElementById("mobile-wishlist-label").textContent = `Saved (${wishlistIds.length})`;
+    function getBagSubtotal() {
+      return state.bagItems.reduce((sum, i) => sum + i.watch.price * i.quantity, 0);
+    }
 
-      const navHeart = document.getElementById("nav-heart-icon");
-      const mobHeart = document.getElementById("mobile-heart-icon");
-      if (wishlistIds.length > 0) {
-        navHeart.setAttribute("fill", "currentColor");
-        navHeart.classList.remove("text-zinc-300");
-        navHeart.classList.add("text-rose-500");
-        mobHeart.setAttribute("fill", "currentColor");
-        mobHeart.classList.remove("text-white");
-        mobHeart.classList.add("text-rose-500");
-      } else {
-        navHeart.setAttribute("fill", "none");
-        navHeart.classList.remove("text-rose-500");
-        navHeart.classList.add("text-zinc-300");
-        mobHeart.setAttribute("fill", "none");
-        mobHeart.classList.remove("text-rose-500");
-        mobHeart.classList.add("text-white");
+    function getBagSavings() {
+      return state.bagItems.reduce(
+        (sum, i) => sum + (i.watch.originalPrice - i.watch.price) * i.quantity,
+        0
+      );
+    }
+
+    function renderHeroCard() {
+      const watch = WATCHES_DATA[state.heroIndex] || WATCHES_DATA[0];
+      const refEl = document.getElementById("hero-watch-ref");
+      const imgEl = document.getElementById("hero-watch-img");
+      const nameEl = document.getElementById("hero-watch-name");
+      const priceEl = document.getElementById("hero-watch-price");
+      const orderBtn = document.getElementById("hero-order-btn");
+
+      if (refEl) refEl.textContent = `${watch.ref} // ${watch.category.toUpperCase()}`;
+      if (imgEl) {
+        imgEl.src = watch.image;
+        imgEl.alt = watch.name;
       }
+      if (nameEl) nameEl.textContent = watch.name;
+      if (priceEl) priceEl.textContent = formatPrice(watch.price);
+      if (orderBtn) orderBtn.onclick = () => openExpressOrder(watch.id);
+
+      [0, 1, 2].forEach((idx) => {
+        const dot = document.getElementById(`hero-dot-${idx}`);
+        if (!dot) return;
+        if (state.heroIndex === idx) {
+          dot.className = "px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-white text-black";
+        } else {
+          dot.className = "px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer bg-black/70 text-zinc-300 hover:text-white border border-white/10";
+        }
+      });
     }
 
-    // Hero Watch Spotlight Switcher
-    function setHeroWatch(index) {
-      heroIndex = index;
-      const w = WATCHES_DATA[heroIndex] || WATCHES_DATA[0];
-      document.getElementById("hero-watch-img").src = w.image;
-      document.getElementById("hero-watch-img").alt = w.name;
-      document.getElementById("hero-watch-ref").textContent = `${w.ref} // ${w.category.toUpperCase()}`;
-      document.getElementById("hero-watch-name").textContent = w.name;
-      document.getElementById("hero-watch-price").textContent = formatPrice(w.price);
-
-      document.getElementById("hero-image-trigger").onclick = () => openSpecsModal(w.id);
-      document.getElementById("hero-specs-btn").onclick = () => openSpecsModal(w.id);
-      document.getElementById("hero-order-btn").onclick = () => openExpressModal(w.id);
-
-      const dotsContainer = document.getElementById("hero-switcher-dots");
-      dotsContainer.innerHTML = [0, 1, 2]
-        .map(
-          (i) => `
-          <button type="button" onclick="setHeroWatch(${i})" class="px-2.5 py-1 rounded-lg font-mono-code text-[10px] font-bold transition-all cursor-pointer ${
-            heroIndex === i
-              ? "bg-white text-black"
-              : "bg-black/70 text-zinc-300 hover:text-white border border-white/10"
-          }">0${i + 1}</button>
-        `
-        )
-        .join("");
+    function setHeroWatch(idx) {
+      state.heroIndex = idx;
+      renderHeroCard();
     }
 
-    // Render Category Pills
+    function openHeroSpecs() {
+      const watch = WATCHES_DATA[state.heroIndex] || WATCHES_DATA[0];
+      openSpecsModal(watch.id);
+    }
+
     function renderCategoryFilters() {
       const container = document.getElementById("category-filters");
+      if (!container) return;
+
+      const counts = { All: WATCHES_DATA.length };
+      CATEGORIES.slice(1).forEach((cat) => {
+        counts[cat] = WATCHES_DATA.filter((w) => w.category === cat).length;
+      });
+
       container.innerHTML = CATEGORIES.map((cat) => {
-        const count =
-          cat === "All"
-            ? WATCHES_DATA.length
-            : WATCHES_DATA.filter((w) => w.category === cat).length;
-        const active = selectedCategory === cat;
-        return `
-          <button type="button" onclick="selectCategory('${cat}')" class="shrink-0 px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-            active
-              ? "bg-white text-black"
-              : "bg-[#141417] hover:bg-[#1E1E22] text-zinc-400 hover:text-white border border-white/[0.07]"
-          }">
-            ${cat} (${count})
-          </button>
-        `;
+        const active = state.selectedCategory === cat;
+        const label = cat === "All" ? `All (${counts.All})` : `${cat} (${counts[cat]})`;
+        const cls = active
+          ? "shrink-0 px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer bg-white text-black"
+          : "shrink-0 px-3.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer bg-[#141417] hover:bg-[#1E1E22] text-zinc-400 hover:text-white border border-white/[0.07]";
+        return `<button type="button" onclick="selectCategory('${cat}')" class="${cls}">${label}</button>`;
       }).join("");
     }
 
     function selectCategory(cat) {
-      selectedCategory = cat;
+      state.selectedCategory = cat;
       renderCategoryFilters();
       renderWatchesGrid();
     }
 
-    function handleSortChange(val) {
-      sortBy = val;
+    function handleSortChange(value) {
+      state.sortBy = value;
       renderWatchesGrid();
     }
 
-    // Render 15-Watch Grid
     function renderWatchesGrid() {
-      let list =
-        selectedCategory === "All"
-          ? [...WATCHES_DATA]
-          : WATCHES_DATA.filter((w) => w.category === selectedCategory);
+      const grid = document.getElementById("watches-grid");
+      if (!grid) return;
 
-      if (sortBy === "price-asc") {
-        list.sort((a, b) => a.price - b.price);
-      } else if (sortBy === "price-desc") {
-        list.sort((a, b) => b.price - a.price);
+      let list =
+        state.selectedCategory === "All"
+          ? WATCHES_DATA
+          : WATCHES_DATA.filter((w) => w.category === state.selectedCategory);
+
+      if (state.sortBy === "price-asc") {
+        list = [...list].sort((a, b) => a.price - b.price);
+      } else if (state.sortBy === "price-desc") {
+        list = [...list].sort((a, b) => b.price - a.price);
       }
 
-      const grid = document.getElementById("watches-grid");
       grid.innerHTML = list
         .map((watch, idx) => {
-          const isSaved = wishlistIds.includes(watch.id);
-          const discountPct = Math.round(
-            ((watch.originalPrice - watch.price) / watch.originalPrice) * 100
-          );
+          const isSaved = state.wishlistIds.includes(watch.id);
+          const discountPct = Math.round(((watch.originalPrice - watch.price) / watch.originalPrice) * 100);
+          const caseWidth = watch.caseSize.split("×")[0].trim();
+          const waterRating = watch.waterResistance.split("/")[0].trim();
 
           return `
-            <article style="transition-delay: ${(idx % 3) * 60}ms" class="reveal-card group h-full flex flex-col rounded-3xl bg-[#111114] border border-white/[0.08] hover:border-white/25 transition-all duration-300 overflow-hidden">
+            <article data-reveal style="transition-delay: ${(idx % 3) * 55}ms" class="reveal-item group h-full flex flex-col rounded-3xl bg-[#111114] border border-white/[0.08] hover:border-white/25 transition-all duration-300 overflow-hidden">
               <div onclick="openSpecsModal(${watch.id})" class="relative aspect-[4/4] bg-[#18181B] overflow-hidden cursor-pointer">
-                <img src="${watch.image}" alt="${watch.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <img
+                  src="${watch.image}"
+                  alt="${escapeHtml(watch.name)}"
+                  loading="lazy"
+                  onerror="this.src='https://placehold.co/800x800/18181B/FAFAFA?text=${encodeURIComponent(watch.ref)}'"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#111114] via-transparent to-black/20"></div>
 
                 ${
                   watch.badge
-                    ? `<span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 font-mono-code text-[10px] font-bold uppercase tracking-wider text-white">${watch.badge}</span>`
+                    ? `<span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 font-mono-code text-[10px] font-bold uppercase tracking-wider text-white">${escapeHtml(watch.badge)}</span>`
                     : ""
                 }
 
-                <button type="button" onclick="event.stopPropagation(); toggleWishlist(${watch.id})" aria-label="Save ${watch.name}" class="absolute top-3.5 right-3.5 z-10 p-2.5 rounded-full bg-black/70 hover:bg-black backdrop-blur-md border border-white/15 transition-transform active:scale-90 cursor-pointer">
+                <button
+                  type="button"
+                  onclick="event.stopPropagation(); toggleWishlist(${watch.id})"
+                  aria-label="Save ${escapeHtml(watch.name)}"
+                  class="absolute top-3.5 right-3.5 z-10 p-2.5 rounded-full bg-black/70 hover:bg-black backdrop-blur-md border border-white/15 transition-transform active:scale-90 cursor-pointer"
+                >
                   <svg viewBox="0 0 24 24" fill="${isSaved ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" class="w-4 h-4 ${isSaved ? "text-rose-500" : "text-white"}">
                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                   </svg>
@@ -1043,9 +1121,14 @@ port" content="width=device-width, initial-scale=1.0">
 
                 <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between">
                   <span class="font-mono-code text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md text-zinc-200 border border-white/10">
-                    ${watch.caseSize.split("×")[0].trim()} • ${watch.waterResistance.split("/")[0].trim()}
+                    ${escapeHtml(caseWidth)} • ${escapeHtml(waterRating)}
                   </span>
-                  <button type="button" onclick="event.stopPropagation(); openSpecsModal(${watch.id})" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/95 hover:bg-white text-black text-[11px] font-bold transition-colors cursor-pointer">
+
+                  <button
+                    type="button"
+                    onclick="event.stopPropagation(); openSpecsModal(${watch.id})"
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/95 hover:bg-white text-black text-[11px] font-bold transition-colors cursor-pointer"
+                  >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3 h-3"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
                     <span>Specs</span>
                   </button>
@@ -1055,13 +1138,17 @@ port" content="width=device-width, initial-scale=1.0">
               <div class="flex-1 flex flex-col justify-between p-5 sm:p-6">
                 <div>
                   <div class="flex items-center justify-between font-mono-code text-[11px] text-zinc-400">
-                    <span class="uppercase">${watch.category}</span>
-                    <span>${watch.ref}</span>
+                    <span class="uppercase">${escapeHtml(watch.category)}</span>
+                    <span>${escapeHtml(watch.ref)}</span>
                   </div>
+
                   <h3 onclick="openSpecsModal(${watch.id})" class="mt-1.5 font-hype text-lg sm:text-xl font-bold text-white group-hover:text-emerald-400 transition-colors cursor-pointer leading-snug">
-                    ${watch.name}
+                    ${escapeHtml(watch.name)}
                   </h3>
-                  <p class="mt-1 text-xs text-zinc-400 line-clamp-1">${watch.subtitle}</p>
+
+                  <p class="mt-1 text-xs text-zinc-400 line-clamp-1">
+                    ${escapeHtml(watch.subtitle)}
+                  </p>
                 </div>
 
                 <div class="mt-5 pt-4 border-t border-white/[0.08]">
@@ -1074,13 +1161,15 @@ port" content="width=device-width, initial-scale=1.0">
                       <span class="font-mono-code text-xl font-bold text-white block mt-0.5">${formatPrice(watch.price)}</span>
                     </div>
 
-                    <button type="button" onclick="addToBag(${watch.id}, false)" class="px-3.5 py-2.5 rounded-xl bg-[#1A1A1E] hover:bg-white hover:text-black border border-white/10 text-white text-xs font-bold transition-all cursor-pointer">
+                    <button type="button" onclick="addToBag(${watch.id}, 1, false)" class="px-3.5 py-2.5 rounded-xl bg-[#1A1A1E] hover:bg-white hover:text-black border border-white/10 text-white text-xs font-bold transition-all cursor-pointer">
                       + Add to Bag
                     </button>
                   </div>
 
-                  <button type="button" onclick="openExpressModal(${watch.id})" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-                    ${WA_ICON_SVG}
+                  <button type="button" onclick="openExpressOrder(${watch.id})" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+                    <svg viewBox="0 0 32 32" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true">
+                      <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.256.59 4.46 1.71 6.404L3.1 29.02l6.784-1.78a12.74 12.74 0 0 0 6.12 1.56h.006c7.058 0 12.796-5.74 12.796-12.8 0-3.42-1.332-6.636-3.75-9.054A12.716 12.716 0 0 0 16.004 3.2zm0 23.438h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-4.026 1.056 1.074-3.926-.252-.402a10.575 10.575 0 0 1-1.624-5.656c0-5.862 4.77-10.632 10.636-10.632 2.84 0 5.51 1.108 7.518 3.116a10.566 10.566 0 0 1 3.112 7.52c0 5.864-4.772 10.634-10.642 10.634zm5.834-7.964c-.32-.16-1.892-.934-2.186-1.04-.294-.108-.506-.16-.72.16-.214.32-.826 1.04-1.012 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.588-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.652.144-.144.32-.374.48-.56.16-.188.214-.32.32-.534.106-.214.054-.4-.026-.56-.08-.16-.72-1.734-.986-2.374-.26-.624-.524-.54-.72-.55l-.614-.01c-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668s1.146 3.094 1.306 3.308c.16.214 2.256 3.444 5.466 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.892-.774 2.158-1.52.266-.748.266-1.388.186-1.52-.08-.134-.294-.214-.614-.374z" />
+                    </svg>
                     <span>Order on WhatsApp</span>
                   </button>
                 </div>
@@ -1090,12 +1179,16 @@ port" content="width=device-width, initial-scale=1.0">
         })
         .join("");
 
-      observeRevealCards();
+      observeRevealItems();
     }
 
-    // IntersectionObserver for smooth scroll reveal
-    function observeRevealCards() {
-      const cards = document.querySelectorAll(".reveal-card");
+    function observeRevealItems() {
+      const items = document.querySelectorAll("[data-reveal]");
+      if (!("IntersectionObserver" in window)) {
+        items.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -1105,95 +1198,115 @@ port" content="width=device-width, initial-scale=1.0">
             }
           });
         },
-        { threshold: 0.05 }
+        { threshold: 0.05, rootMargin: "0px 0px -15px 0px" }
       );
-      cards.forEach((c) => observer.observe(c));
+
+      items.forEach((el) => observer.observe(el));
     }
 
-    // Smooth Scroll
-    function scrollToSection(id, category = null) {
-      if (category) {
-        selectedCategory = category;
-        renderCategoryFilters();
-        renderWatchesGrid();
+    function updateHeaderBadges() {
+      const wishCount = state.wishlistIds.length;
+      const bagCount = getBagCount();
+
+      const navWish = document.getElementById("nav-wishlist-count");
+      const navHeart = document.getElementById("nav-heart-icon");
+      const navBag = document.getElementById("nav-bag-count");
+      const mobWish = document.getElementById("mobile-wishlist-label");
+      const mobHeart = document.getElementById("mobile-heart-icon");
+      const mobBag = document.getElementById("mobile-bag-label");
+
+      if (navWish) navWish.textContent = String(wishCount);
+      if (navHeart) {
+        navHeart.setAttribute("fill", wishCount > 0 ? "currentColor" : "none");
+        navHeart.className = `w-3.5 h-3.5 sm:w-4 sm:h-4 ${wishCount > 0 ? "text-rose-500" : "text-zinc-300"}`;
       }
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (navBag) navBag.textContent = String(bagCount);
+      if (mobWish) mobWish.textContent = `Saved (${wishCount})`;
+      if (mobHeart) {
+        mobHeart.setAttribute("fill", wishCount > 0 ? "currentColor" : "none");
+        mobHeart.className = `w-4 h-4 shrink-0 ${wishCount > 0 ? "text-rose-500" : "text-white"}`;
+      }
+      if (mobBag) mobBag.textContent = `Bag (${bagCount})`;
     }
 
-    // Wishlist Actions
     function toggleWishlist(watchId) {
-      const w = getWatchById(watchId);
-      if (!w) return;
-      const idx = wishlistIds.indexOf(watchId);
-      if (idx > -1) {
-        wishlistIds.splice(idx, 1);
-        showToast("Removed from Saved", w.name);
+      const watch = WATCHES_DATA.find((w) => w.id === watchId);
+      if (!watch) return;
+
+      const idx = state.wishlistIds.indexOf(watchId);
+      if (idx >= 0) {
+        state.wishlistIds.splice(idx, 1);
+        showToast("Removed from Saved", watch.name);
       } else {
-        wishlistIds.push(watchId);
-        showToast("Saved to Wishlist", w.name);
+        state.wishlistIds.push(watchId);
+        showToast("Saved to Wishlist", watch.name);
       }
+
       savePersistedState();
-      updateCounters();
+      updateHeaderBadges();
       renderWatchesGrid();
       if (!document.getElementById("wishlist-drawer").classList.contains("hidden")) {
         renderWishlistDrawer();
       }
     }
 
-    // Bag Actions
-    function addToBag(watchId, openDrawer = false) {
-      const w = getWatchById(watchId);
-      if (!w) return;
-      bagConfirmed = null;
-      const existing = bagItems.find((i) => i.id === watchId);
+    function addToBag(watchId, qty = 1, openDrawerAfter = false) {
+      const watch = WATCHES_DATA.find((w) => w.id === watchId);
+      if (!watch) return;
+
+      state.bagConfirmed = null;
+      const existing = state.bagItems.find((i) => i.watch.id === watchId);
       if (existing) {
-        existing.quantity += 1;
+        existing.quantity += qty;
       } else {
-        bagItems.push({ id: watchId, quantity: 1 });
+        state.bagItems.push({ watch, quantity: qty });
       }
+
       savePersistedState();
-      updateCounters();
-      if (openDrawer) {
+      updateHeaderBadges();
+
+      if (openDrawerAfter) {
+        state.bagOrderId = generateOrderId();
         openBagDrawer();
       } else {
-        showToast(`${w.name} added to Bag`, "Open Concierge Bag to checkout together");
+        showToast(`${watch.name} added to Bag`, "Open Bag to checkout together");
       }
     }
 
     function updateBagQty(watchId, delta) {
-      const item = bagItems.find((i) => i.id === watchId);
-      if (!item) return;
-      item.quantity += delta;
-      if (item.quantity <= 0) {
-        bagItems = bagItems.filter((i) => i.id !== watchId);
-      }
+      state.bagItems = state.bagItems
+        .map((item) =>
+          item.watch.id === watchId ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item
+        )
+        .filter((item) => item.quantity > 0);
+
       savePersistedState();
-      updateCounters();
+      updateHeaderBadges();
       renderBagDrawer();
     }
 
     function removeBagItem(watchId) {
-      bagItems = bagItems.filter((i) => i.id !== watchId);
+      state.bagItems = state.bagItems.filter((item) => item.watch.id !== watchId);
       savePersistedState();
-      updateCounters();
+      updateHeaderBadges();
       renderBagDrawer();
     }
 
-    // Specs Modal
     function openSpecsModal(watchId) {
-      const w = getWatchById(watchId);
-      if (!w) return;
+      const watch = WATCHES_DATA.find((w) => w.id === watchId);
+      if (!watch) return;
+
       const modal = document.getElementById("specs-modal");
       const content = document.getElementById("specs-modal-content");
+      if (!modal || !content) return;
 
-      const specs = [
-        { label: "Movement", value: w.movement },
-        { label: "Case Size", value: w.caseSize },
-        { label: "Crystal", value: w.crystal },
-        { label: "Water Rating", value: w.waterResistance },
-        { label: "Strap / Bracelet", value: w.strap },
-        { label: "Power Reserve", value: w.powerReserve }
+      const specsList = [
+        { label: "Movement", value: watch.movement },
+        { label: "Case Size", value: watch.caseSize },
+        { label: "Crystal", value: watch.crystal },
+        { label: "Water Rating", value: watch.waterResistance },
+        { label: "Strap / Bracelet", value: watch.strap },
+        { label: "Power Reserve", value: watch.powerReserve }
       ];
 
       content.innerHTML = `
@@ -1202,27 +1315,28 @@ port" content="width=device-width, initial-scale=1.0">
         </button>
 
         <div class="grid grid-cols-1 md:grid-cols-12">
-          <div class="md:col-span-5 bg-[#18181B] flex items-center justify-center overflow-hidden min-h-[280px]">
-            <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
+          <div class="md:col-span-5 bg-[#18181B] flex items-center justify-center overflow-hidden min-h-[260px]">
+            <img src="${watch.image}" alt="${escapeHtml(watch.name)}" onerror="this.src='https://placehold.co/800x800/18181B/FAFAFA?text=${encodeURIComponent(watch.ref)}'" class="w-full h-full object-cover" />
           </div>
 
-          <div class="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="md:col-span-7 p-5 sm:p-8 flex flex-col justify-between space-y-6">
             <div>
               <div class="flex items-center gap-2.5 font-mono-code text-xs text-emerald-400">
-                <span class="font-bold uppercase">${w.category}</span>
+                <span class="font-bold uppercase">${escapeHtml(watch.category)}</span>
                 <span>•</span>
-                <span>${w.ref}</span>
+                <span>${escapeHtml(watch.ref)}</span>
               </div>
-              <h3 class="mt-1.5 font-hype text-2xl sm:text-3xl font-extrabold text-white">${w.name}</h3>
-              <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">${w.story}</p>
 
-              <div class="mt-6 grid grid-cols-2 gap-3">
-                ${specs
+              <h3 class="mt-1.5 font-hype text-2xl sm:text-3xl font-extrabold text-white">${escapeHtml(watch.name)}</h3>
+              <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">${escapeHtml(watch.story)}</p>
+
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${specsList
                   .map(
                     (s) => `
                   <div class="p-3 rounded-2xl bg-[#18181B] border border-white/[0.08]">
-                    <span class="block font-mono-code text-[10px] font-bold uppercase tracking-wider text-zinc-400">${s.label}</span>
-                    <span class="mt-1 block text-xs font-semibold text-white">${s.value}</span>
+                    <span class="block font-mono-code text-[10px] font-bold uppercase tracking-wider text-zinc-400">${escapeHtml(s.label)}</span>
+                    <span class="mt-1 block text-xs font-semibold text-white">${escapeHtml(s.value)}</span>
                   </div>
                 `
                   )
@@ -1233,18 +1347,17 @@ port" content="width=device-width, initial-scale=1.0">
             <div class="pt-5 border-t border-white/10 space-y-4">
               <div class="flex items-baseline justify-between">
                 <div>
-                  <span class="text-xs text-zinc-400 block">Collector Box &amp; 2-Year Warranty Included</span>
-                  <span class="font-mono-code text-xs text-zinc-500 line-through">${formatPrice(w.originalPrice)}</span>
+                  <span class="text-xs text-zinc-400 block">Collector Box &amp; 2-Year Warranty</span>
+                  <span class="font-mono-code text-xs text-zinc-500 line-through">${formatPrice(watch.originalPrice)}</span>
                 </div>
-                <span class="font-mono-code text-2xl font-bold text-white">${formatPrice(w.price)}</span>
+                <span class="font-mono-code text-2xl font-bold text-white">${formatPrice(watch.price)}</span>
               </div>
 
               <div class="flex flex-col sm:flex-row gap-3">
-                <button type="button" onclick="closeSpecsModal(); openExpressModal(${w.id})" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
-                  ${WA_ICON_SVG}
+                <button type="button" onclick="openExpressOrder(${watch.id})" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
                   <span>Order on WhatsApp</span>
                 </button>
-                <button type="button" onclick="closeSpecsModal(); addToBag(${w.id}, true)" class="py-3.5 px-5 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
+                <button type="button" onclick="closeSpecsModal(); addToBag(${watch.id}, 1, true);" class="py-3.5 px-5 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
                   <span>Add to Bag</span>
                 </button>
               </div>
@@ -1254,50 +1367,35 @@ port" content="width=device-width, initial-scale=1.0">
       `;
 
       modal.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
+      syncBodyScrollLock();
     }
 
     function closeSpecsModal() {
-      document.getElementById("specs-modal").classList.add("hidden");
-      document.body.style.overflow = "";
+      const modal = document.getElementById("specs-modal");
+      if (modal) modal.classList.add("hidden");
+      syncBodyScrollLock();
     }
 
-    // Express Single-Watch WhatsApp Order Modal
-    function openExpressModal(watchId) {
-      const w = getWatchById(watchId);
-      if (!w) return;
-      closeWishlistDrawer();
-      expressWatch = w;
-      expressOrderId = generateOrderId();
-      expressQty = 1;
-      expressErrors = {};
-      expressConfirmed = null;
-      renderExpressModal();
-      document.getElementById("express-modal").classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeExpressModal() {
-      document.getElementById("express-modal").classList.add("hidden");
-      document.body.style.overflow = "";
-    }
-
-    function buildSingleWhatsAppMessage() {
-      if (!expressWatch) return "";
-      const total = expressWatch.price * expressQty;
-      const cleanName = expressForm.name.trim() || "[Customer Name]";
-      const cleanPhone = expressForm.phone.trim() ? `\n• Mobile / WhatsApp: ${expressForm.phone.trim()}` : "";
-      const cleanCity = expressForm.city.trim() || "Lahore";
-      const cleanAddress = expressForm.address.trim() || "[Complete Street Address]";
-      const noteLine = expressForm.note.trim() ? `\n• Gift / Wrist Note: ${expressForm.note.trim()}` : "";
+    function buildSingleWhatsAppMessage(watch) {
+      if (!watch) return "";
+      const total = watch.price * state.expressQty;
+      const cleanName = state.expressForm.name.trim() || "[Customer Name]";
+      const cleanPhone = state.expressForm.phone.trim()
+        ? `\n• Mobile / WhatsApp: ${state.expressForm.phone.trim()}`
+        : "";
+      const cleanCity = state.expressForm.city.trim() || "Lahore";
+      const cleanAddress = state.expressForm.address.trim() || "[Complete Street Address]";
+      const noteLine = state.expressForm.note.trim()
+        ? `\n• Gift / Wrist Note: ${state.expressForm.note.trim()}`
+        : "";
 
       return (
         `Assalam-o-Alaikum ${STORE_CONFIG.storeName} Concierge! I want to place an order:\n\n` +
-        `• Order Reference: ${expressOrderId}\n` +
-        `• Watch: ${expressWatch.name} (${expressWatch.ref})\n` +
-        `• Quantity: ${expressQty}\n` +
+        `• Order Reference: ${state.expressOrderId}\n` +
+        `• Watch: ${watch.name} (${watch.ref})\n` +
+        `• Quantity: ${state.expressQty}\n` +
         `• Total Amount: ${formatPrice(total)} (${STORE_CONFIG.freeShippingNote})\n` +
-        `• Payment Method: ${expressForm.payment}\n\n` +
+        `• Payment Method: ${state.expressForm.payment}\n\n` +
         `Delivery Details:\n` +
         `• Full Name: ${cleanName}${cleanPhone}\n` +
         `• City: ${cleanCity}\n` +
@@ -1306,65 +1404,102 @@ port" content="width=device-width, initial-scale=1.0">
       );
     }
 
-    function updateExpressLivePreview() {
-      const pre = document.getElementById("express-live-preview");
-      if (pre) pre.textContent = buildSingleWhatsAppMessage();
+    function openExpressOrder(watchId) {
+      const watch = WATCHES_DATA.find((w) => w.id === watchId);
+      if (!watch) return;
+
+      closeSpecsModal();
+      closeWishlistDrawer();
+      closeMobileMenu();
+
+      state.expressWatchId = watchId;
+      state.expressQty = 1;
+      state.expressOrderId = generateOrderId();
+      state.expressErrors = {};
+      state.expressConfirmed = null;
+
+      renderExpressOrderModal();
+      const modal = document.getElementById("express-order-modal");
+      if (modal) modal.classList.remove("hidden");
+      syncBodyScrollLock();
     }
 
-    function setExpressQty(delta) {
-      expressQty = Math.max(1, expressQty + delta);
-      renderExpressModal();
+    function closeExpressModal() {
+      const modal = document.getElementById("express-order-modal");
+      if (modal) modal.classList.add("hidden");
+      syncBodyScrollLock();
     }
 
-    function setExpressCity(city) {
-      expressForm.city = city;
-      renderExpressModal();
+    function adjustExpressQty(delta) {
+      state.expressQty = Math.max(1, state.expressQty + delta);
+      renderExpressOrderModal();
     }
 
-    function setExpressPayment(method) {
-      expressForm.payment = method;
-      renderExpressModal();
+    function selectExpressCity(city) {
+      state.expressForm.city = city;
+      renderExpressOrderModal();
+    }
+
+    function selectExpressPayment(method) {
+      state.expressForm.payment = method;
+      renderExpressOrderModal();
     }
 
     function submitExpressOrder(e) {
       e.preventDefault();
-      if (!expressWatch) return;
+      const watch = WATCHES_DATA.find((w) => w.id === state.expressWatchId);
+      if (!watch) return;
 
       const errs = {};
-      if (!expressForm.name.trim()) errs.name = "Please enter your full name for the courier parcel.";
-      if (!expressForm.address.trim()) errs.address = "Please enter your complete street address.";
+      if (!state.expressForm.name.trim()) {
+        errs.name = "Please enter your full name for the courier parcel.";
+      }
+      if (!state.expressForm.address.trim()) {
+        errs.address = "Please enter your complete street address.";
+      }
 
       if (Object.keys(errs).length > 0) {
-        expressErrors = errs;
-        renderExpressModal();
+        state.expressErrors = errs;
+        renderExpressOrderModal();
         return;
       }
 
-      expressErrors = {};
-      const message = buildSingleWhatsAppMessage();
+      state.expressErrors = {};
+      const message = buildSingleWhatsAppMessage(watch);
       const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(waUrl, "_blank", "noopener,noreferrer");
 
-      expressConfirmed = {
-        orderId: expressOrderId,
-        watchName: expressWatch.name,
-        qty: expressQty,
-        total: expressWatch.price * expressQty,
-        customerName: expressForm.name.trim(),
-        city: expressForm.city.trim() || "Lahore",
-        payment: expressForm.payment,
+      state.expressConfirmed = {
+        orderId: state.expressOrderId,
+        watchName: watch.name,
+        total: watch.price * state.expressQty,
+        customerName: state.expressForm.name.trim(),
+        city: state.expressForm.city.trim() || "Lahore",
+        paymentMethod: state.expressForm.payment,
         message,
         waUrl
       };
-      renderExpressModal();
+
+      renderExpressOrderModal();
     }
 
-    function renderExpressModal() {
-      if (!expressWatch) return;
-      const content = document.getElementById("express-modal-content");
+    function copyExpressReceipt() {
+      if (!state.expressConfirmed) return;
+      const text = state.expressConfirmed.message;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
+      showToast("Order Receipt Copied", "Paste directly into WhatsApp anytime");
+    }
 
-      if (expressConfirmed) {
-        content.innerHTML = `
+    function renderExpressOrderModal() {
+      const container = document.getElementById("express-order-content");
+      const watch = WATCHES_DATA.find((w) => w.id === state.expressWatchId);
+      if (!container || !watch) return;
+
+      if (state.expressConfirmed) {
+        const c = state.expressConfirmed;
+        container.innerHTML = `
           <div class="space-y-5 py-2">
             <div class="flex items-start justify-between">
               <div class="flex items-center gap-3">
@@ -1372,7 +1507,7 @@ port" content="width=device-width, initial-scale=1.0">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-6 h-6"><path d="M20 6 9 17l-5-5"/></svg>
                 </div>
                 <div>
-                  <span class="font-mono-code text-xs font-bold text-emerald-400">ORDER ${expressConfirmed.orderId}</span>
+                  <span class="font-mono-code text-xs font-bold text-emerald-400">ORDER ${escapeHtml(c.orderId)}</span>
                   <h3 class="font-hype text-xl sm:text-2xl font-extrabold text-white">Order Ready on WhatsApp!</h3>
                 </div>
               </div>
@@ -1382,37 +1517,36 @@ port" content="width=device-width, initial-scale=1.0">
             </div>
 
             <p class="text-sm text-zinc-300 leading-relaxed">
-              WhatsApp has opened with your order receipt for <strong class="text-white">${expressConfirmed.watchName}</strong>. Tap <strong>Send</strong> in WhatsApp to confirm dispatch!
+              WhatsApp has opened with your order receipt for <strong class="text-white">${escapeHtml(c.watchName)}</strong>. Tap <strong>Send</strong> in WhatsApp to confirm dispatch!
             </p>
 
             <div class="p-4 rounded-2xl bg-[#18181B] border border-white/10 space-y-2 text-xs">
               <div class="flex justify-between">
                 <span class="text-zinc-400">Recipient:</span>
-                <span class="font-bold text-white">${expressConfirmed.customerName} (${expressConfirmed.city})</span>
+                <span class="font-bold text-white">${escapeHtml(c.customerName)} (${escapeHtml(c.city)})</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-zinc-400">Payment Method:</span>
-                <span class="font-bold text-white">${expressConfirmed.payment}</span>
+                <span class="font-bold text-white">${escapeHtml(c.paymentMethod)}</span>
               </div>
               <div class="flex justify-between pt-2 border-t border-white/10">
                 <span class="font-bold text-white">Total Payable:</span>
-                <span class="font-mono-code font-bold text-emerald-400">${formatPrice(expressConfirmed.total)}</span>
+                <span class="font-mono-code font-bold text-emerald-400">${formatPrice(c.total)}</span>
               </div>
             </div>
 
             <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
               <div class="flex items-center justify-between mb-1.5">
                 <span class="text-[11px] font-bold text-emerald-400">Formatted WhatsApp Receipt</span>
-                <button type="button" onclick="copyText(expressConfirmed.message)" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold cursor-pointer">
+                <button type="button" onclick="copyExpressReceipt()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold cursor-pointer">
                   <span>Copy Receipt</span>
                 </button>
               </div>
-              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${expressConfirmed.message}</pre>
+              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${escapeHtml(c.message)}</pre>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3 pt-1">
-              <a href="${expressConfirmed.waUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors">
-                ${WA_ICON_SVG}
+              <a href="${c.waUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2 transition-colors">
                 <span>Re-open WhatsApp</span>
               </a>
               <button type="button" onclick="closeExpressModal()" class="py-3.5 px-5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm cursor-pointer">
@@ -1424,7 +1558,27 @@ port" content="width=device-width, initial-scale=1.0">
         return;
       }
 
-      content.innerHTML = `
+      const cityButtons = STORE_CONFIG.deliveryCities
+        .map((city) => {
+          const active = state.expressForm.city === city;
+          const cls = active
+            ? "px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors cursor-pointer bg-white text-black border-white"
+            : "px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors cursor-pointer bg-[#18181B] hover:bg-white/10 text-zinc-300 border-white/10";
+          return `<button type="button" onclick="selectExpressCity('${city}')" class="${cls}">${city}</button>`;
+        })
+        .join("");
+
+      const paymentButtons = ["Cash on Delivery (COD)", "Online Bank Transfer"]
+        .map((method) => {
+          const active = state.expressForm.payment === method;
+          const cls = active
+            ? "p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer bg-emerald-500/15 border-emerald-400 text-white"
+            : "p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer bg-[#18181B] hover:bg-white/5 border-white/10 text-zinc-400";
+          return `<button type="button" onclick="selectExpressPayment('${method}')" class="${cls}"><span>${method}</span></button>`;
+        })
+        .join("");
+
+      container.innerHTML = `
         <div class="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
           <div>
             <div class="flex items-center gap-2">
@@ -1432,7 +1586,7 @@ port" content="width=device-width, initial-scale=1.0">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 Direct WhatsApp Checkout
               </span>
-              <span class="font-mono-code text-[11px] font-semibold px-2 py-0.5 rounded bg-white/10 text-zinc-200">${expressOrderId}</span>
+              <span class="font-mono-code text-[11px] font-semibold px-2 py-0.5 rounded bg-white/10 text-zinc-200">${state.expressOrderId}</span>
             </div>
             <h3 class="mt-1 font-hype text-xl sm:text-2xl font-extrabold text-white">Place Your Order</h3>
           </div>
@@ -1443,17 +1597,17 @@ port" content="width=device-width, initial-scale=1.0">
 
         <div class="mt-4 p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
           <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
-            <img src="${expressWatch.image}" alt="${expressWatch.name}" class="w-full h-full object-cover" />
+            <img src="${watch.image}" alt="${escapeHtml(watch.name)}" onerror="this.src='https://placehold.co/200x200/18181B/FAFAFA?text=${encodeURIComponent(watch.ref)}'" class="w-full h-full object-cover" />
           </div>
           <div class="flex-1 min-w-0">
-            <span class="font-mono-code text-[11px] font-semibold text-zinc-400">${expressWatch.ref}</span>
-            <h4 class="font-hype text-base font-bold text-white truncate">${expressWatch.name}</h4>
+            <span class="font-mono-code text-[11px] font-semibold text-zinc-400">${escapeHtml(watch.ref)}</span>
+            <h4 class="font-hype text-base font-bold text-white truncate">${escapeHtml(watch.name)}</h4>
             <div class="mt-1.5 flex items-center justify-between gap-2">
-              <span class="font-mono-code text-sm font-bold text-emerald-400">${formatPrice(expressWatch.price * expressQty)}</span>
+              <span class="font-mono-code text-sm font-bold text-emerald-400">${formatPrice(watch.price * state.expressQty)}</span>
               <div class="flex items-center gap-2 bg-[#09090B] border border-white/15 rounded-lg px-2 py-0.5">
-                <button type="button" onclick="setExpressQty(-1)" class="text-white p-0.5 cursor-pointer font-bold">-</button>
-                <span class="font-mono-code text-xs font-bold w-4 text-center">${expressQty}</span>
-                <button type="button" onclick="setExpressQty(1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
+                <button type="button" onclick="adjustExpressQty(-1)" class="text-white p-0.5 cursor-pointer font-bold">−</button>
+                <span class="font-mono-code text-xs font-bold w-4 text-center">${state.expressQty}</span>
+                <button type="button" onclick="adjustExpressQty(1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
               </div>
             </div>
           </div>
@@ -1463,151 +1617,193 @@ port" content="width=device-width, initial-scale=1.0">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-zinc-200 mb-1">Full Name <span class="text-rose-400">*</span></label>
-              <input type="text" value="${escapeHtml(expressForm.name)}" oninput="expressForm.name = this.value; updateExpressLivePreview()" placeholder="e.g. Usman Tariq" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${expressErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
-              ${expressErrors.name ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${expressErrors.name}</p>` : ""}
+              <input
+                type="text"
+                value="${escapeHtml(state.expressForm.name)}"
+                oninput="state.expressForm.name = this.value; if(state.expressErrors.name){ delete state.expressErrors.name; renderExpressOrderModal(); }"
+                placeholder="e.g. Usman Tariq"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none ${state.expressErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"}"
+              />
+              ${state.expressErrors.name ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${state.expressErrors.name}</p>` : ""}
             </div>
+
             <div>
               <label class="block text-xs font-bold text-zinc-200 mb-1">Mobile / WhatsApp <span class="text-zinc-500 font-normal">(Optional)</span></label>
-              <input type="tel" value="${escapeHtml(expressForm.phone)}" oninput="expressForm.phone = this.value; updateExpressLivePreview()" placeholder="e.g. 0300-1234567" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+              <input
+                type="tel"
+                value="${escapeHtml(state.expressForm.phone)}"
+                oninput="state.expressForm.phone = this.value; updateExpressPreview();"
+                placeholder="e.g. 0300-1234567"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none"
+              />
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-bold text-zinc-200 mb-1.5">Delivery City</label>
-            <div class="flex flex-wrap gap-1.5 mb-2">
-              ${STORE_CONFIG.deliveryCities
-                .map(
-                  (c) => `
-                <button type="button" onclick="setExpressCity('${c}')" class="px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
-                    expressForm.city === c
-                      ? "bg-white text-black border-white"
-                      : "bg-[#18181B] hover:bg-white/10 text-zinc-300 border-white/10"
-                  }">${c}</button>
-              `
-                )
-                .join("")}
-            </div>
-            <input type="text" value="${escapeHtml(expressForm.city)}" oninput="expressForm.city = this.value; updateExpressLivePreview()" placeholder="Or type any city in Pakistan" class="w-full px-3.5 py-2 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+            <div class="flex flex-wrap gap-1.5 mb-2">${cityButtons}</div>
+            <input
+              type="text"
+              value="${escapeHtml(state.expressForm.city)}"
+              oninput="state.expressForm.city = this.value; updateExpressPreview();"
+              placeholder="Or type any city"
+              class="w-full px-3.5 py-2 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none"
+            />
           </div>
 
           <div>
             <label class="block text-xs font-bold text-zinc-200 mb-1">Complete Street Address <span class="text-rose-400">*</span></label>
-            <input type="text" value="${escapeHtml(expressForm.address)}" oninput="expressForm.address = this.value; updateExpressLivePreview()" placeholder="House #, Street / Sector / Block, Landmark" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${expressErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
-            ${expressErrors.address ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${expressErrors.address}</p>` : ""}
+            <input
+              type="text"
+              value="${escapeHtml(state.expressForm.address)}"
+              oninput="state.expressForm.address = this.value; if(state.expressErrors.address){ delete state.expressErrors.address; } updateExpressPreview();"
+              placeholder="House #, Street / Sector / Block, Landmark"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none ${state.expressErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"}"
+            />
+            ${state.expressErrors.address ? `<p class="mt-1 text-[11px] font-medium text-rose-400">${state.expressErrors.address}</p>` : ""}
           </div>
 
           <div>
             <label class="block text-xs font-bold text-zinc-200 mb-1.5">Payment Method</label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              ${["Cash on Delivery (COD)", "Online Bank Transfer"]
-                .map(
-                  (m) => `
-                <button type="button" onclick="setExpressPayment('${m}')" class="p-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    expressForm.payment === m
-                      ? "bg-emerald-500/15 border-emerald-400 text-white"
-                      : "bg-[#18181B] hover:bg-white/5 border-white/10 text-zinc-400"
-                  }">${m}</button>
-              `
-                )
-                .join("")}
-            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">${paymentButtons}</div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-zinc-200 mb-1">Gift Note or Wrist Size Adjustment <span class="text-zinc-500 font-normal">(Optional)</span></label>
-            <input type="text" value="${escapeHtml(expressForm.note)}" oninput="expressForm.note = this.value; updateExpressLivePreview()" placeholder="e.g. Add gift wrap / adjust bracelet for 7-inch wrist" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none" />
+            <label class="block text-xs font-bold text-zinc-200 mb-1">Gift Note or Wrist Adjustment <span class="text-zinc-500 font-normal">(Optional)</span></label>
+            <input
+              type="text"
+              value="${escapeHtml(state.expressForm.note)}"
+              oninput="state.expressForm.note = this.value; updateExpressPreview();"
+              placeholder="e.g. Add gift wrap / adjust bracelet for 7-inch wrist"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none"
+            />
           </div>
 
           <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
             <div class="flex items-center justify-between mb-1.5">
               <span class="text-[11px] font-bold text-emerald-400">Live WhatsApp Order Preview</span>
-              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${expressOrderId}</span>
+              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${state.expressOrderId}</span>
             </div>
-            <pre id="express-live-preview" class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${buildSingleWhatsAppMessage()}</pre>
+            <pre id="express-wa-preview" class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${escapeHtml(buildSingleWhatsAppMessage(watch))}</pre>
           </div>
 
           <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center justify-center gap-2.5 transition-all cursor-pointer">
-            ${WA_ICON_SVG}
             <span>Confirm &amp; Send Order on WhatsApp</span>
           </button>
         </form>
       `;
     }
 
-    // Bag Drawer
+    function updateExpressPreview() {
+      const watch = WATCHES_DATA.find((w) => w.id === state.expressWatchId);
+      const pre = document.getElementById("express-wa-preview");
+      if (watch && pre) {
+        pre.textContent = buildSingleWhatsAppMessage(watch);
+      }
+    }
+
+    function buildBagWhatsAppMessage() {
+      const itemLines = state.bagItems
+        .map(
+          (item, idx) =>
+            `${idx + 1}. ${item.watch.name} (${item.watch.ref}) × ${item.quantity} — ${formatPrice(item.watch.price * item.quantity)}`
+        )
+        .join("\n");
+
+      const cleanName = state.bagForm.name.trim() || "[Customer Name]";
+      const cleanPhone = state.bagForm.phone.trim()
+        ? `\n• Mobile / WhatsApp: ${state.bagForm.phone.trim()}`
+        : "";
+      const cleanCity = state.bagForm.city.trim() || "Lahore";
+      const cleanAddress = state.bagForm.address.trim() || "[Complete Street Address]";
+      const noteLine = state.bagForm.note.trim()
+        ? `\n• Gift / Wrist Note: ${state.bagForm.note.trim()}`
+        : "";
+
+      return (
+        `Assalam-o-Alaikum ${STORE_CONFIG.storeName} Concierge! I want to place a multi-watch order:\n\n` +
+        `• Order Reference: ${state.bagOrderId}\n` +
+        `${itemLines}\n\n` +
+        `• Grand Total: ${formatPrice(getBagSubtotal())} (${STORE_CONFIG.freeShippingNote})\n` +
+        `• Payment Method: ${state.bagForm.payment}\n\n` +
+        `Delivery Details:\n` +
+        `• Full Name: ${cleanName}${cleanPhone}\n` +
+        `• City: ${cleanCity}\n` +
+        `• Address: ${cleanAddress}${noteLine}\n\n` +
+        `Please confirm availability and share dispatch details. Thank you!`
+      );
+    }
+
     function openBagDrawer() {
-      bagConfirmed = null;
-      bagOrderId = generateOrderId();
-      bagErrors = {};
       renderBagDrawer();
-      document.getElementById("bag-drawer").classList.remove("hidden");
-      document.body.style.overflow = "hidden";
+      const drawer = document.getElementById("bag-drawer");
+      if (drawer) drawer.classList.remove("hidden");
+      syncBodyScrollLock();
     }
 
     function closeBagDrawer() {
-      document.getElementById("bag-drawer").classList.add("hidden");
-      document.body.style.overflow = "";
+      const drawer = document.getElementById("bag-drawer");
+      if (drawer) drawer.classList.add("hidden");
+      syncBodyScrollLock();
+    }
+
+    function selectBagCity(city) {
+      state.bagForm.city = city;
+      renderBagDrawer();
     }
 
     function submitBagOrder(e) {
       e.preventDefault();
-      if (bagItems.length === 0) return;
+      if (state.bagItems.length === 0) return;
 
       const errs = {};
-      if (!bagForm.name.trim()) errs.name = "Please enter your full name.";
-      if (!bagForm.address.trim()) errs.address = "Please enter your complete delivery address.";
+      if (!state.bagForm.name.trim()) errs.name = "Please enter your full name.";
+      if (!state.bagForm.address.trim()) errs.address = "Please enter your complete street address.";
 
       if (Object.keys(errs).length > 0) {
-        bagErrors = errs;
+        state.bagErrors = errs;
         renderBagDrawer();
         return;
       }
 
-      bagErrors = {};
-      const lines = bagItems
-        .map((item, idx) => {
-          const w = getWatchById(item.id);
-          return `${idx + 1}. ${w.name} (${w.ref}) × ${item.quantity} — ${formatPrice(w.price * item.quantity)}`;
-        })
-        .join("\n");
-
-      const subtotal = bagItems.reduce((sum, item) => sum + getWatchById(item.id).price * item.quantity, 0);
-      const cleanPhone = bagForm.phone.trim() ? `\n• Mobile / WhatsApp: ${bagForm.phone.trim()}` : "";
-      const noteLine = bagForm.note.trim() ? `\n• Gift / Wrist Note: ${bagForm.note.trim()}` : "";
-
-      const message =
-        `Assalam-o-Alaikum ${STORE_CONFIG.storeName} Concierge! I want to place a multi-watch order:\n\n` +
-        `• Order Reference: ${bagOrderId}\n` +
-        `${lines}\n\n` +
-        `• Grand Total: ${formatPrice(subtotal)} (${STORE_CONFIG.freeShippingNote})\n` +
-        `• Payment Method: ${bagForm.payment}\n\n` +
-        `Delivery Details:\n` +
-        `• Full Name: ${bagForm.name.trim()}${cleanPhone}\n` +
-        `• City: ${bagForm.city.trim() || "Lahore"}\n` +
-        `• Address: ${bagForm.address.trim()}${noteLine}\n\n` +
-        `Please confirm availability and share dispatch details. Thank you!`;
-
+      state.bagErrors = {};
+      const message = buildBagWhatsAppMessage();
       const waUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(waUrl, "_blank", "noopener,noreferrer");
 
-      bagConfirmed = { orderId: bagOrderId, message, waUrl };
-      bagItems = [];
+      state.bagConfirmed = {
+        orderId: state.bagOrderId,
+        total: getBagSubtotal(),
+        message,
+        waUrl
+      };
+      state.bagItems = [];
       savePersistedState();
-      updateCounters();
+      updateHeaderBadges();
       renderBagDrawer();
     }
 
+    function copyBagReceipt() {
+      if (!state.bagConfirmed) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.bagConfirmed.message).catch(() => {});
+      }
+      showToast("Order Receipt Copied", "Paste directly into WhatsApp anytime");
+    }
+
     function renderBagDrawer() {
-      const content = document.getElementById("bag-drawer-content");
-      const totalCount = bagItems.reduce((s, i) => s + i.quantity, 0);
-      const subtotal = bagItems.reduce((s, i) => s + getWatchById(i.id).price * i.quantity, 0);
-      const savings = bagItems.reduce(
-        (s, i) => s + (getWatchById(i.id).originalPrice - getWatchById(i.id).price) * i.quantity,
-        0
-      );
+      const container = document.getElementById("bag-drawer-content");
+      if (!container) return;
+
+      const bagCount = getBagCount();
+      const subtotal = getBagSubtotal();
+      const savings = getBagSavings();
 
       let bodyHtml = "";
-      if (bagConfirmed) {
+      let footerHtml = "";
+
+      if (state.bagConfirmed) {
+        const c = state.bagConfirmed;
         bodyHtml = `
           <div class="space-y-4 py-2">
             <div class="flex items-center gap-3">
@@ -1615,7 +1811,7 @@ port" content="width=device-width, initial-scale=1.0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="w-6 h-6"><path d="M20 6 9 17l-5-5"/></svg>
               </div>
               <div>
-                <span class="font-mono-code text-xs font-bold text-emerald-400">${bagConfirmed.orderId}</span>
+                <span class="font-mono-code text-xs font-bold text-emerald-400">${escapeHtml(c.orderId)}</span>
                 <h4 class="font-hype text-xl font-extrabold text-white">Order Ready on WhatsApp!</h4>
               </div>
             </div>
@@ -1625,118 +1821,169 @@ port" content="width=device-width, initial-scale=1.0">
             <div class="rounded-2xl bg-[#18181B] border border-emerald-500/30 p-3.5">
               <div class="flex items-center justify-between mb-1.5">
                 <span class="text-[11px] font-bold text-emerald-400">Order Receipt</span>
-                <button type="button" onclick="copyText(bagConfirmed.message)" class="px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">Copy Receipt</button>
+                <button type="button" onclick="copyBagReceipt()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">
+                  <span>Copy Receipt</span>
+                </button>
               </div>
-              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${bagConfirmed.message}</pre>
+              <pre class="whitespace-pre-wrap font-sans text-xs text-zinc-300 leading-relaxed bg-[#09090B] p-3 rounded-xl border border-white/10">${escapeHtml(c.message)}</pre>
             </div>
-            <a href="${bagConfirmed.waUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2">
-              ${WA_ICON_SVG}
+            <a href="${c.waUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2">
               <span>Re-open WhatsApp</span>
             </a>
           </div>
         `;
-      } else if (bagItems.length === 0) {
+      } else if (state.bagItems.length === 0) {
         bodyHtml = `
           <div class="h-full flex flex-col items-center justify-center text-center py-12">
+            <div class="w-14 h-14 rounded-2xl bg-white/10 text-white flex items-center justify-center mb-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
             <h4 class="font-hype text-xl font-extrabold text-white">Your Bag is Empty</h4>
             <p class="mt-1.5 text-xs text-zinc-400 max-w-xs leading-relaxed">
               Add one or more watches to checkout together in one WhatsApp message.
             </p>
-            <button type="button" onclick="closeBagDrawer(); scrollToSection('collection')" class="mt-6 px-6 py-3 rounded-xl bg-white text-black text-xs font-bold cursor-pointer">
+            <button type="button" onclick="closeBagDrawer(); scrollToSection('collection');" class="mt-6 px-6 py-3 rounded-xl bg-white text-black text-xs font-bold cursor-pointer">
               Explore Watches
             </button>
           </div>
         `;
       } else {
-        const itemsHtml = bagItems
-          .map(({ id, quantity }) => {
-            const w = getWatchById(id);
-            return `
-              <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
-                <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
-                  <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="font-hype text-sm font-bold text-white truncate">${w.name}</h4>
-                    <button type="button" onclick="removeBagItem(${w.id})" class="text-zinc-500 hover:text-rose-400 p-1 cursor-pointer text-xs">✕</button>
-                  </div>
-                  <span class="font-mono-code text-[11px] text-zinc-400 block">${w.ref}</span>
-                  <div class="mt-2 flex items-center justify-between">
-                    <span class="font-mono-code text-xs font-bold text-emerald-400">${formatPrice(w.price * quantity)}</span>
-                    <div class="flex items-center gap-2 bg-[#09090B] border border-white/15 rounded-lg px-2 py-0.5">
-                      <button type="button" onclick="updateBagQty(${w.id}, -1)" class="text-white p-0.5 cursor-pointer font-bold">-</button>
-                      <span class="font-mono-code text-xs font-bold w-4 text-center">${quantity}</span>
-                      <button type="button" onclick="updateBagQty(${w.id}, 1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
-                    </div>
-                  </div>
+        const itemsHtml = state.bagItems
+          .map(
+            ({ watch, quantity }) => `
+          <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
+            <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+              <img src="${watch.image}" alt="${escapeHtml(watch.name)}" onerror="this.src='https://placehold.co/200x200/18181B/FAFAFA?text=${encodeURIComponent(watch.ref)}'" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-2">
+                <h4 class="font-hype text-sm font-bold text-white truncate">${escapeHtml(watch.name)}</h4>
+                <button type="button" onclick="removeBagItem(${watch.id})" aria-label="Remove ${escapeHtml(watch.name)}" class="text-zinc-500 hover:text-rose-400 p-1 cursor-pointer text-xs font-bold">✕</button>
+              </div>
+              <span class="font-mono-code text-[11px] text-zinc-400 block">${escapeHtml(watch.ref)}</span>
+              <div class="mt-2 flex items-center justify-between">
+                <span class="font-mono-code text-xs font-bold text-emerald-400">${formatPrice(watch.price * quantity)}</span>
+                <div class="flex items-center gap-2 bg-[#09090B] border border-white/15 rounded-lg px-2 py-0.5">
+                  <button type="button" onclick="updateBagQty(${watch.id}, -1)" class="text-white p-0.5 cursor-pointer font-bold">−</button>
+                  <span class="font-mono-code text-xs font-bold w-4 text-center">${quantity}</span>
+                  <button type="button" onclick="updateBagQty(${watch.id}, 1)" class="text-white p-0.5 cursor-pointer font-bold">+</button>
                 </div>
               </div>
-            `;
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        const quickCities = STORE_CONFIG.deliveryCities
+          .slice(0, 6)
+          .map((c) => {
+            const active = state.bagForm.city === c;
+            const cls = active
+              ? "px-2 py-1 rounded-md text-[11px] font-semibold border cursor-pointer bg-white text-black border-white"
+              : "px-2 py-1 rounded-md text-[11px] font-semibold border cursor-pointer bg-[#18181B] text-zinc-300 border-white/10";
+            return `<button type="button" onclick="selectBagCity('${c}')" class="${cls}">${c}</button>`;
           })
           .join("");
 
         bodyHtml = `
           <div class="space-y-3">${itemsHtml}</div>
+
           <form id="bag-checkout-form" onsubmit="submitBagOrder(event)" class="pt-4 border-t border-white/10 space-y-3">
             <div class="flex items-center justify-between">
               <p class="text-xs font-bold text-white">Delivery Details</p>
-              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${bagOrderId}</span>
+              <span class="font-mono-code text-[10px] font-semibold text-zinc-400">${state.bagOrderId}</span>
             </div>
+
             <div>
-              <input type="text" value="${escapeHtml(bagForm.name)}" oninput="bagForm.name = this.value" placeholder="Full Name *" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${bagErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs text-white placeholder-zinc-500 focus:outline-none" />
-              ${bagErrors.name ? `<p class="mt-1 text-[11px] text-rose-400">${bagErrors.name}</p>` : ""}
+              <input
+                type="text"
+                value="${escapeHtml(state.bagForm.name)}"
+                oninput="state.bagForm.name = this.value; if(state.bagErrors.name){ delete state.bagErrors.name; renderBagDrawer(); }"
+                placeholder="Full Name *"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border text-xs text-white placeholder-zinc-500 focus:outline-none ${state.bagErrors.name ? "border-rose-500" : "border-white/15 focus:border-emerald-400"}"
+              />
+              ${state.bagErrors.name ? `<p class="mt-1 text-[11px] text-rose-400">${state.bagErrors.name}</p>` : ""}
             </div>
-            <input type="tel" value="${escapeHtml(bagForm.phone)}" oninput="bagForm.phone = this.value" placeholder="Mobile / WhatsApp Number (Optional)" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
-            <div class="flex flex-wrap gap-1.5">
-              ${STORE_CONFIG.deliveryCities
-                .slice(0, 6)
-                .map(
-                  (c) => `<button type="button" onclick="bagForm.city='${c}'; renderBagDrawer()" class="px-2 py-1 rounded-md text-[11px] font-semibold border cursor-pointer ${bagForm.city === c ? "bg-white text-black border-white" : "bg-[#18181B] text-zinc-300 border-white/10"}">${c}</button>`
-                )
-                .join("")}
-            </div>
-            <input type="text" value="${escapeHtml(bagForm.city)}" oninput="bagForm.city = this.value" placeholder="Delivery City" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
+
+            <input
+              type="tel"
+              value="${escapeHtml(state.bagForm.phone)}"
+              oninput="state.bagForm.phone = this.value;"
+              placeholder="Mobile / WhatsApp Number (Optional)"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none"
+            />
+
+            <div class="flex flex-wrap gap-1.5">${quickCities}</div>
+
+            <input
+              type="text"
+              value="${escapeHtml(state.bagForm.city)}"
+              oninput="state.bagForm.city = this.value;"
+              placeholder="Delivery City"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none"
+            />
+
             <div>
-              <input type="text" value="${escapeHtml(bagForm.address)}" oninput="bagForm.address = this.value" placeholder="Complete Street Address *" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border ${bagErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"} text-xs text-white placeholder-zinc-500 focus:outline-none" />
-              ${bagErrors.address ? `<p class="mt-1 text-[11px] text-rose-400">${bagErrors.address}</p>` : ""}
+              <input
+                type="text"
+                value="${escapeHtml(state.bagForm.address)}"
+                oninput="state.bagForm.address = this.value; if(state.bagErrors.address){ delete state.bagErrors.address; renderBagDrawer(); }"
+                placeholder="Complete Street Address *"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border text-xs text-white placeholder-zinc-500 focus:outline-none ${state.bagErrors.address ? "border-rose-500" : "border-white/15 focus:border-emerald-400"}"
+              />
+              ${state.bagErrors.address ? `<p class="mt-1 text-[11px] text-rose-400">${state.bagErrors.address}</p>` : ""}
             </div>
-            <select onchange="bagForm.payment = this.value" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs font-semibold text-white focus:outline-none">
-              <option value="Cash on Delivery (COD)" ${bagForm.payment === "Cash on Delivery (COD)" ? "selected" : ""}>Payment: Cash on Delivery (COD)</option>
-              <option value="Online Bank Transfer" ${bagForm.payment === "Online Bank Transfer" ? "selected" : ""}>Payment: Online Bank Transfer</option>
+
+            <select
+              onchange="state.bagForm.payment = this.value;"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs font-semibold text-white focus:outline-none"
+            >
+              <option value="Cash on Delivery (COD)" ${state.bagForm.payment === "Cash on Delivery (COD)" ? "selected" : ""}>Payment: Cash on Delivery (COD)</option>
+              <option value="Online Bank Transfer" ${state.bagForm.payment === "Online Bank Transfer" ? "selected" : ""}>Payment: Online Bank Transfer</option>
             </select>
-            <input type="text" value="${escapeHtml(bagForm.note)}" oninput="bagForm.note = this.value" placeholder="Optional Gift Note / Wrist Adjustment" class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none" />
+
+            <input
+              type="text"
+              value="${escapeHtml(state.bagForm.note)}"
+              oninput="state.bagForm.note = this.value;"
+              placeholder="Optional Gift Note / Wrist Adjustment"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-[#18181B] border border-white/15 focus:border-emerald-400 text-xs text-white placeholder-zinc-500 focus:outline-none"
+            />
           </form>
+        `;
+
+        footerHtml = `
+          <div class="p-5 sm:p-6 border-t border-white/10 bg-[#09090B] space-y-3.5">
+            <div class="space-y-1.5 text-xs">
+              ${
+                savings > 0
+                  ? `<div class="flex justify-between text-emerald-400 font-semibold"><span>Drop Savings</span><span>-${formatPrice(savings)}</span></div>`
+                  : ""
+              }
+              <div class="flex justify-between text-zinc-400">
+                <span>Insured Express Delivery</span>
+                <span class="font-bold text-emerald-400">FREE</span>
+              </div>
+              <div class="flex justify-between items-baseline pt-1.5 border-t border-white/10">
+                <span class="text-sm font-bold text-white">Grand Total</span>
+                <span class="font-mono-code text-lg font-bold text-white">${formatPrice(subtotal)}</span>
+              </div>
+            </div>
+            <button type="submit" form="bag-checkout-form" class="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
+              <span>Confirm &amp; Send Order on WhatsApp</span>
+            </button>
+          </div>
         `;
       }
 
-      const footerHtml =
-        !bagConfirmed && bagItems.length > 0
-          ? `
-            <div class="p-5 sm:p-6 border-t border-white/10 bg-[#09090B] space-y-3.5">
-              <div class="space-y-1.5 text-xs">
-                ${savings > 0 ? `<div class="flex justify-between text-emerald-400 font-semibold"><span>Drop Savings</span><span>-${formatPrice(savings)}</span></div>` : ""}
-                <div class="flex justify-between text-zinc-400"><span>Insured Express Delivery</span><span class="font-bold text-emerald-400">FREE</span></div>
-                <div class="flex justify-between items-baseline pt-1.5 border-t border-white/10">
-                  <span class="text-sm font-bold text-white">Grand Total</span>
-                  <span class="font-mono-code text-lg font-bold text-white">${formatPrice(subtotal)}</span>
-                </div>
-              </div>
-              <button type="submit" form="bag-checkout-form" class="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer">
-                ${WA_ICON_SVG}
-                <span>Confirm &amp; Send Order on WhatsApp</span>
-              </button>
-            </div>
-          `
-          : "";
-
-      content.innerHTML = `
+      container.innerHTML = `
         <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between">
           <div>
             <h3 class="font-hype text-lg font-extrabold text-white">Your Bag</h3>
-            <p class="text-xs text-zinc-400">${bagConfirmed ? `Order ${bagConfirmed.orderId}` : `${totalCount} watch(es) selected`}</p>
+            <p class="text-xs text-zinc-400">${state.bagConfirmed ? `Order ${state.bagConfirmed.orderId}` : `${bagCount} ${bagCount === 1 ? "watch" : "watches"} selected`}</p>
           </div>
-          <button type="button" onclick="closeBagDrawer()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+          <button type="button" onclick="closeBagDrawer()" aria-label="Close bag" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
@@ -1745,148 +1992,145 @@ port" content="width=device-width, initial-scale=1.0">
       `;
     }
 
-    // Wishlist Drawer
     function openWishlistDrawer() {
       renderWishlistDrawer();
-      document.getElementById("wishlist-drawer").classList.remove("hidden");
-      document.body.style.overflow = "hidden";
+      const drawer = document.getElementById("wishlist-drawer");
+      if (drawer) drawer.classList.remove("hidden");
+      syncBodyScrollLock();
     }
 
     function closeWishlistDrawer() {
-      document.getElementById("wishlist-drawer").classList.add("hidden");
-      document.body.style.overflow = "";
+      const drawer = document.getElementById("wishlist-drawer");
+      if (drawer) drawer.classList.add("hidden");
+      syncBodyScrollLock();
     }
 
     function renderWishlistDrawer() {
-      const content = document.getElementById("wishlist-drawer-content");
-      const savedList = WATCHES_DATA.filter((w) => wishlistIds.includes(w.id));
+      const container = document.getElementById("wishlist-drawer-content");
+      if (!container) return;
 
-      const bodyHtml =
-        savedList.length === 0
+      const savedWatches = WATCHES_DATA.filter((w) => state.wishlistIds.includes(w.id));
+
+      const listHtml =
+        savedWatches.length === 0
           ? `
-            <div class="h-full flex flex-col items-center justify-center text-center py-12">
-              <h4 class="font-hype text-xl font-extrabold text-white">No Saved Watches</h4>
-              <p class="mt-1.5 text-xs text-zinc-400 max-w-xs">Tap the heart icon on any watch card to save your favorites here.</p>
-            </div>
-          `
-          : savedList
+          <div class="h-full flex flex-col items-center justify-center text-center py-12">
+            <h4 class="font-hype text-xl font-extrabold text-white">No Saved Watches</h4>
+            <p class="mt-1.5 text-xs text-zinc-400 max-w-xs">Tap the heart icon on any watch card to save your favorites here.</p>
+          </div>
+        `
+          : savedWatches
               .map(
                 (w) => `
-              <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
-                <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
-                  <img src="${w.image}" alt="${w.name}" class="w-full h-full object-cover" />
-                </div>
-                <div class="flex-1 min-w-0">
-                  <span class="font-mono-code text-[11px] text-zinc-400">${w.ref}</span>
-                  <h4 class="font-hype text-sm font-bold text-white truncate">${w.name}</h4>
-                  <span class="font-mono-code text-xs font-bold text-emerald-400 block mt-0.5">${formatPrice(w.price)}</span>
-                  <div class="mt-2 flex items-center gap-2">
-                    <button type="button" onclick="openExpressModal(${w.id})" class="px-3 py-1 rounded-lg bg-emerald-500 text-black text-[11px] font-bold cursor-pointer">Order Now</button>
-                    <button type="button" onclick="addToBag(${w.id}, false)" class="px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">+ Bag</button>
-                    <button type="button" onclick="toggleWishlist(${w.id})" class="text-[11px] text-zinc-500 hover:text-rose-400 cursor-pointer">Remove</button>
-                  </div>
-                </div>
+          <div class="p-3.5 rounded-2xl bg-[#18181B] border border-white/10 flex items-center gap-3.5">
+            <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-900 border border-white/10">
+              <img src="${w.image}" alt="${escapeHtml(w.name)}" onerror="this.src='https://placehold.co/200x200/18181B/FAFAFA?text=${encodeURIComponent(w.ref)}'" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <span class="font-mono-code text-[11px] text-zinc-400">${escapeHtml(w.ref)}</span>
+              <h4 class="font-hype text-sm font-bold text-white truncate">${escapeHtml(w.name)}</h4>
+              <span class="font-mono-code text-xs font-bold text-emerald-400 block mt-0.5">${formatPrice(w.price)}</span>
+              <div class="mt-2 flex items-center gap-2">
+                <button type="button" onclick="openExpressOrder(${w.id})" class="px-3 py-1 rounded-lg bg-emerald-500 text-black text-[11px] font-bold cursor-pointer">Order Now</button>
+                <button type="button" onclick="addToBag(${w.id}, 1, false)" class="px-2.5 py-1 rounded-lg bg-white/10 text-white text-[11px] font-semibold cursor-pointer">+ Bag</button>
+                <button type="button" onclick="toggleWishlist(${w.id})" class="text-[11px] text-zinc-500 hover:text-rose-400 cursor-pointer">Remove</button>
               </div>
-            `
+            </div>
+          </div>
+        `
               )
               .join("");
 
-      content.innerHTML = `
+      container.innerHTML = `
         <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between">
           <div>
             <h3 class="font-hype text-lg font-extrabold text-white">Saved Watches</h3>
-            <p class="text-xs text-zinc-400">${savedList.length} saved timepiece(s)</p>
+            <p class="text-xs text-zinc-400">${savedWatches.length} saved timepiece(s)</p>
           </div>
-          <button type="button" onclick="closeWishlistDrawer()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
+          <button type="button" onclick="closeWishlistDrawer()" aria-label="Close wishlist" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
-        <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3">${bodyHtml}</div>
+        <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3">${listHtml}</div>
       `;
     }
 
-    // Mobile Menu Drawer
     function openMobileMenu() {
-      document.getElementById("mobile-menu-drawer").classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    }
-    function closeMobileMenu() {
-      document.getElementById("mobile-menu-drawer").classList.add("hidden");
-      document.body.style.overflow = "";
+      const drawer = document.getElementById("mobile-menu-drawer");
+      if (drawer) drawer.classList.remove("hidden");
+      syncBodyScrollLock();
     }
 
-    // Direct WhatsApp Concierge Chat
+    function closeMobileMenu() {
+      const drawer = document.getElementById("mobile-menu-drawer");
+      if (drawer) drawer.classList.add("hidden");
+      syncBodyScrollLock();
+    }
+
+    function syncBodyScrollLock() {
+      const ids = ["specs-modal", "express-order-modal", "bag-drawer", "wishlist-drawer", "mobile-menu-drawer"];
+      const anyOpen = ids.some((id) => {
+        const el = document.getElementById(id);
+        return el && !el.classList.contains("hidden");
+      });
+      document.body.style.overflow = anyOpen ? "hidden" : "";
+    }
+
+    function scrollToSection(sectionId, category = null) {
+      closeMobileMenu();
+      if (category) {
+        state.selectedCategory = category;
+        renderCategoryFilters();
+        renderWatchesGrid();
+      }
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     function openDirectConcierge() {
       const msg = `Assalam-o-Alaikum ${STORE_CONFIG.storeName}! I'm checking out your 2026 watch collection and need help choosing a piece.`;
-      window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+      window.open(
+        `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
     }
 
-    // Copy Receipt Helper
-    function copyText(text) {
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(() => {
-          showToast("Order Receipt Copied", "Paste directly into WhatsApp anytime");
-        });
-      }
-    }
-
-    // Toast Notification
-    function showToast(title, subtitle = "") {
-      const container = document.getElementById("toast-container");
-      document.getElementById("toast-title").textContent = title;
-      document.getElementById("toast-subtitle").textContent = subtitle;
-      container.classList.remove("hidden");
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(hideToast, 3200);
-    }
-
-    function hideToast() {
-      document.getElementById("toast-container").classList.add("hidden");
-    }
-
-    function escapeHtml(str) {
-      return String(str || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    // Scroll Header Effect
-    window.addEventListener(
-      "scroll",
-      () => {
-        const header = document.getElementById("main-header");
-        if (window.scrollY > 18) {
-          header.classList.add("backdrop-blur-2xl", "bg-[#09090B]/80", "shadow-[0_12px_40px_rgba(0,0,0,0.75)]", "py-3");
-          header.classList.remove("backdrop-blur-xl", "bg-[#09090B]/45", "py-4");
-        } else {
-          header.classList.remove("backdrop-blur-2xl", "bg-[#09090B]/80", "shadow-[0_12px_40px_rgba(0,0,0,0.75)]", "py-3");
-          header.classList.add("backdrop-blur-xl", "bg-[#09090B]/45", "py-4");
-        }
-      },
-      { passive: true }
-    );
-
-    // Escape key closes modals/drawers
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeSpecsModal();
-        closeExpressModal();
-        closeBagDrawer();
-        closeWishlistDrawer();
-        closeMobileMenu();
-      }
-    });
-
-    // Initialize Store on Load
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("footer-year").textContent = new Date().getFullYear();
+      const yearEl = document.getElementById("footer-year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
       loadPersistedState();
-      updateCounters();
-      setHeroWatch(0);
+      updateHeaderBadges();
+      renderHeroCard();
       renderCategoryFilters();
       renderWatchesGrid();
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          const header = document.getElementById("main-header");
+          if (!header) return;
+          if (window.scrollY > 18) {
+            header.className =
+              "sticky top-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-2xl bg-[#09090B]/85 shadow-[0_12px_40px_rgba(0,0,0,0.75)] py-2 sm:py-3";
+          } else {
+            header.className =
+              "sticky top-0 z-40 w-full max-w-full border-0 transition-all duration-300 backdrop-blur-xl bg-[#09090B]/55 py-2.5 sm:py-4";
+          }
+        },
+        { passive: true }
+      );
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeSpecsModal();
+          closeExpressModal();
+          closeBagDrawer();
+          closeWishlistDrawer();
+          closeMobileMenu();
+        }
+      });
     });
   </script>
 </body>
